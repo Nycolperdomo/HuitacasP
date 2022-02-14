@@ -17,7 +17,7 @@ public class miscasosDao {
 	//guarda el resultado de la consulta
 	ResultSet rs;
 	//prepara la sentencia que se va a ejecutar sql
-
+//comentario de prueba
 	PreparedStatement ps;
 	String sql;
 	int row;
