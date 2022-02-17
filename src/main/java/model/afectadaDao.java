@@ -108,13 +108,13 @@ public int eliminar(int id) throws SQLException {
 	sql="DELETE FROM afectada WHERE IDafectada="+id;
 	
 	try {
-		con= Conexion.conectar(); //Abriendo la conexión a la BD
+		con= Conexion.conectar(); //Abriendo la conexiï¿½n a la BD
 		ps=con.prepareStatement(sql); //preparar sentencia
 		
 		System.out.println(ps);
-		ps.executeUpdate();//Ejeución de la sentencia	
+		ps.executeUpdate();//Ejeuciï¿½n de la sentencia	
 		ps.close();
-		System.out.println("Se eliminó una afectada");
+		System.out.println("Se eliminï¿½ una afectada");
 		
 	}catch(Exception e) {
 		System.out.println("Error al eliminar afectada" +e.getMessage());
@@ -132,12 +132,12 @@ public int changeEstado(afectadaVo a) throws SQLException {
 	sql="UPDATE afectada SET estado=? FROM afectada WHERE IDafectada"+avo.getIDafectada();
 	
 	try {
-		con=c.conectar(); //Abriendo la conexión a la BD
+		con=c.conectar(); //Abriendo la conexiï¿½n a la BD
 		ps=con.prepareStatement(sql); //preparar sentencia
 		ps.setBoolean(1, a.getAfecUs().isEstado());
 		
 		System.out.println(ps);
-		ps.executeUpdate();//Ejeución de la sentencia	
+		ps.executeUpdate();//Ejeuciï¿½n de la sentencia	
 		ps.close();
 		System.out.println("Se cambio el estado de una afectada");
 		
@@ -186,24 +186,24 @@ public int edit(afectadaVo r) throws SQLException {
 sql="UPDATE afectada SET nombre=?,apellido=?,telefono=?,tipoDocumento=?,numeroDocumento=?,fechaNacimiento=? WHERE IDafectada="+r.getIDafectada();
 	
 	try {
-		con= Conexion.conectar(); //Abriendo la conexión a la BD
+		con= Conexion.conectar(); //Abriendo la conexiï¿½n a la BD
 		ps=con.prepareStatement(sql); //preparar sentencia
 		ps.setString(1, r.getNombre());
 		ps.setString(2, r.getApellido());
 		ps.setString(3, r.getTelefono());
 		ps.setString(4,r.getTipoDocumento());
 		ps.setString(5, r.getNumeroDocumento());
-		//falta correo y contraseña ps.setInt(7, p.getProUs().getIDusuario());
+		//falta correo y contraseï¿½a ps.setInt(7, p.getProUs().getIDusuario());
 		ps.setString(6, r.getFechaNacimiento());
-		//get usuario o get correo y contraseña
+		//get usuario o get correo y contraseï¿½a
 		/*ps.setString(7, r.getAfecUs().getCorreo());
-		ps.setString(8, r.getAfecUs().getContraseña());
+		ps.setString(8, r.getAfecUs().getContraseï¿½a());
 	*/
 		
 		System.out.println(ps);
-		ps.executeUpdate();//Ejeución de la sentencia	
+		ps.executeUpdate();//Ejeuciï¿½n de la sentencia	
 		ps.close();
-		System.out.println("Se cambió la afectada");
+		System.out.println("Se cambiï¿½ la afectada");
 		
 	}catch(Exception e) {
 		System.out.println("Error al cambiar afectad" +e.getMessage());
@@ -231,7 +231,6 @@ public int registrar(afectadaVo r) throws SQLException {
 		ps.close();
 		System.out.println("se registro una afectada");
 	} catch (Exception e) {
-		// TODO: handle exception
 
 		System.out.println("error al registrar el afec"+e.getMessage());
 	}

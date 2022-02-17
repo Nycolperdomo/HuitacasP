@@ -35,7 +35,8 @@ public class miscasosDao {
 			rs = ps.executeQuery();//ejecucion de la sentencia y guardar el resultado en el resulSet
 			while(rs.next()) {
 				miscasosVo a = new miscasosVo();
-				a.setIDmicaso(rs.getInt(1));		
+				a.setIDmicaso(rs.getInt(1));
+				a.setDescripcion(rs.getString(2));
 				micaso.add(a);
 				System.out.println("conexion exitosa");
 			
@@ -81,7 +82,7 @@ public class miscasosDao {
 	}
 public int edit(miscasosVo r) throws SQLException {
 
-sql="UPDATE miscasos SET Descripcion=? WHERE IDmicaso="+r.getDescripcion();
+sql="UPDATE miscasos SET Descripcion=? WHERE IDmicaso="+r.getIDmicaso();
 
 try {
 	con= Conexion.conectar(); //Abriendo la conexión a la BD
@@ -104,26 +105,20 @@ return row;//Retorna cantidad de filas afectadas
 
 
 public int registrar(miscasosVo r) throws SQLException {
-
-
-	//sql="INSERT INTO caso (fechaInicio,fechaFin,estado,IDasesoria) VALUES(?,?,?,?)";
-	sql="INSERT INTO miscasos (descripcion) VALUES(?)";
+	sql="INSERT INTO miscasos (Descripcion) VALUES (?)";
 try {
 	con= Conexion.conectar();//abriendo la conexion a la bd
 	ps= con.prepareStatement(sql);//preparar sentencia
 	ps.setString(1, r.getDescripcion());
-	
 
-//	ps.setInt(4, r.getAseCas().getIDasesoria());
 	
 	System.out.println(ps);
 	ps.executeUpdate();//ejecucion de la sentencia sentencias dif a consulta
 	ps.close();
 	System.out.println("se registro un MYcaso");
 } catch (Exception e) {
-	// TODO: handle exception
 
-	System.out.println("error al registrar un caso"+e.getMessage());
+	System.out.println("error al registrar un MMYcaso"+e.getMessage());
 }
 finally {
 	con.close();
@@ -131,43 +126,6 @@ finally {
 return row;//retorna cantidad de filas afectadas
 }
 
-
-
-public List report() throws SQLException {
-	List <casoVo> caso = new ArrayList<>();
-	sql = "SELECT IDcaso,fechaInicio,fechaFin,estado,descripcion FROM caso JOIN tipo_abuso on tipo_abuso.IDabuso = caso.IDcaso;";
-	try {
-		con= Conexion.conectar();//abriendo la conexion a la bd
-		ps= con.prepareStatement(sql);//preparar sentencia
-		rs = ps.executeQuery();//ejecucion de la sentencia y guardar el resultado en el resulSet
-		while(rs.next()) {
-			casoVo a = new casoVo();
-			a.setIDcaso(rs.getInt(1));
-			a.setFechaInicio(rs.getString(2));
-			a.setFechaFin(rs.getString(3));
-
-			a.setEstado(rs.getBoolean(4));
-
-			a.setAbuCas(new tipoAbusoVo());
-			a.getAbuCas().setDescripcion(rs.getString(5));				
-			caso.add(a);
-			System.out.println("conexion exitosa");
-		
-		}
-		
-		ps.close();
-		
-	} catch (Exception e) {
-		// TODO: handle exception
-
-		System.out.println("conexion no exitosa"+e.getMessage());
-	}
-	finally {
-		con.close();
-	}
-	return caso;	
-
-}
 
 
 }

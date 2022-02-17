@@ -9,12 +9,13 @@ f<%@include file="header.jsp" %>
   		<label for="correo">Correo</label>
   		<input type="email" class="form-control" name="correo" id="correo" placeholder="Ingrese el correo" onchange="verifyCorreo()" required/>
   	</div>
+	<!--
   <div id="validarC" class="text-danger"></div>	
   		<div class="form-group">
-  		<label for="password">Contraseña</label><br>
-  		<input type="password" class="form-control" name="contrasena" id="contrasena" placeholder="Ingrese la contraseña" required/>
+  		<label for="password">Contraseï¿½a</label><br>
+  		<input type="password" class="form-control" name="contrasena" id="contrasena" placeholder="Ingrese la contraseï¿½a" required/>
   	</div>
-  	
+  	-->
   	<div class="form-check">
   <input class="form-check-input" type="checkbox" name="chkEstado" id="chkEstado" checked>
   <label class="form-check-label" for="flexCheckChecked">

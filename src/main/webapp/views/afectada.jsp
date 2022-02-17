@@ -66,14 +66,14 @@
 
 <script>
 
-<!--queryselector para seleccionar la tabla que se va autilizatr , nos permite identificar en este caso por un ID  -->
+<!--queryselectorparaseleccionarlaTablaquesevaautilizatr , nospermiteidentificarenestecasoporunID-->
 var myTable = document.querySelector("#dataTa");
 <!--inicializar el objeto datatable que tiene js -->
 var dataTable = new DataTable("#dataTa", {
     perPage:5,
     labels: {
         placeholder: "Buscar...",
-        perPage: "{select} Registros por página",
+        perPage: "{select} Registros por pï¿½gina",
         noRows: "No se encontraron registros",
         info: "Mostrando {start} al {end} de {rows} registros",
     }

@@ -10,12 +10,13 @@
 	<tr>
 		<th>Id</th>
 		<th>Descripcion</th>
+		<th>Acciones</th>
 	</tr>
 	<!-- el member esta request.setAttribute("member", inte);para recibir datos (controller) -->
 	<c:forEach items="${caso}" var="p">	
 		<tr>
 			<td>${p.getIDmicaso()}</td>
-			<td>${p.getDescripcion}</td>
+			<td>${p.getDescripcion()}</td>
 			
 			
 			<td>
@@ -35,14 +36,14 @@
 
 <script>
 
-<!--queryselector para seleccionar la tabla que se va autilizatr , nos permite identificar en este caso por un ID  -->
+
 var myTable = document.querySelector("#dataTable");
 <!--inicializar el objeto datatable que tiene js -->
 var dataTable = new DataTable("#dataTable", {
     perPage:5,
     labels: {
         placeholder: "Buscar...",
-        perPage: "{select} Registros por p·gina",
+        perPage: "{select} Registros por p√°gina",
         noRows: "No se encontraron registros",
         info: "Mostrando {start} al {end} de {rows} registros",
     }

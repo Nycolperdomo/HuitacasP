@@ -16,7 +16,7 @@ public class UsuarioDao {
 
 	//definir variables necesarias pra realizar operaciones sibre la bd
 	UsuarioVo uvo = new UsuarioVo();
-
+	Contrasena contra=new Contrasena();
 	
 	Connection con;
 	ResultSet rs;
@@ -90,8 +90,32 @@ public class UsuarioDao {
 		}
 		return row;//retorna cantidad de filas afectadas
 	}
-	
-	
+
+	public int registrarProf(UsuarioVo r) throws SQLException {
+		sql="INSERT INTO usuario(correo,contrasena,estado,cargo) VALUES(?,?,?,?)";
+		try {
+			con= Conexion.conectar();//abriendo la conexion a la bd
+			ps= con.prepareStatement(sql);//preparar sentencia
+			ps.setString(1, r.getCorreo());
+			ps.setString(2, contra.getPassword());
+			ps.setBoolean(3,r.isEstado());
+			ps.setString(4, r.getCargo());
+			System.out.println(ps);
+			ps.executeUpdate();//ejecucion de la sentencia sentencias dif a consulta
+			ps.close();
+			System.out.println("se registro un usuario");
+		} catch (Exception e) {
+			// TODO: handle exception
+
+			System.out.println("error al registrar el rol"+e.getMessage());
+		}
+		finally {
+			con.close();
+		}
+		return row;//retorna cantidad de filas afectadas
+	}
+
+
 	public int registrarDatos(UsuarioVo r) throws SQLException {
 		sql="INSERT INTO usuario(correo,contrasena,estado,cargo) VALUES(?,?,?,?)";
 		try {

@@ -8,7 +8,7 @@
   		<label for="descripcion">Descripcion</label>
   		<input type="text" class="form-control" name="descripcion" id="descripcion">
   	</div>
-  	
+  	<br>
   
   	<button type="submit" class="btn btn-primary">Guardar</button>
 </div>

@@ -14,8 +14,8 @@
 		<th>Fecha Fin</th>
 		<th>Estado</th>
 		<th>Tipo<br>Asesoria</th>
-	
-	
+	<th>Profesional <br> a cargo</th>
+		<th></th>
 		<th colspan="2">Acciones</th>
 	</tr>
 	<!-- el member esta request.setAttribute("member", inte);para recibir datos (controller) -->
@@ -40,9 +40,8 @@
 			</c:if>
 			
 			<td>${a.aseCas.tipo}</td>
-			
+			<td></td>
 			<td>
-			
 			<a class="btn btn-warning" href="CasoController?accion=ver&id=${a.getIDcaso()}" role="button">Editar</a>
 			<!--invocar una funcion con onclick(borrar es el nombre de la funcion)-->
 			<a class="btn btn-danger" onclick="borrar(event,${a.getIDcaso()},'Caso')" role="button">Borrar</a>
@@ -66,7 +65,7 @@ var dataTable = new DataTable("#dataTable", {
     perPage:5,
     labels: {
         placeholder: "Buscar...",
-        perPage: "{select} Registros por página",
+        perPage: "{select} Registros por pagina",
         noRows: "No se encontraron registros",
         info: "Mostrando {start} al {end} de {rows} registros",
     }

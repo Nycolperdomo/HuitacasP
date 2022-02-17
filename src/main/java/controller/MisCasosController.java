@@ -142,13 +142,13 @@ public class MisCasosController extends HttpServlet {
 
 		private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
-			if(request.getParameter("Descripcion") !=null) {
-				cVo.setDescripcion(request.getParameter("Descripcion"));
+			if(request.getParameter("descripcion") !=null) {
+				cVo.setDescripcion(request.getParameter("descripcion"));
 			}
 
 			try {
 				cDao.registrar(cVo);
-				response.sendRedirect("MisCasosController?accion=listar");
+				response.sendRedirect(" RolController?accion=page");
 				System.out.println("Mycaso registrado");
 			}catch(Exception e) {
 				
@@ -158,16 +158,17 @@ public class MisCasosController extends HttpServlet {
 
 private void ver(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	miscasosDao dao;
-	miscasosVo vo;
+	miscasosVo caso;
 	if(request.getParameter("id")!=null) {
-		vo = new miscasosVo();
-	vo.setIDmicaso(Integer.parseInt(request.getParameter("id")));
-	dao = new miscasosDao();
+		caso= new miscasosVo();
+		dao = new miscasosDao();
+	caso.setIDmicaso(Integer.parseInt(request.getParameter("id")));
+
 	try {
 		//(para que del modelo suba al controlador)
-		vo=dao.consultaId(vo.getIDmicaso());
+		caso=dao.consultaId(cVo.getIDmicaso());
 		//(para que del controlador suba a una vista)
-		request.setAttribute("caso", vo);
+		request.setAttribute("caso", caso);
 		request.getRequestDispatcher("views/eddit-mycaso.jsp").forward(request, response);
 		System.out.println("mycaso encontrado");
 		
@@ -182,11 +183,11 @@ private void ver(HttpServletRequest request, HttpServletResponse response) throw
 		
 	
 		private void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-			if(request.getParameter("id")!=null) {
-				
-				cVo.setIDmicaso(Integer.parseInt(request.getParameter("id")));
-				cVo.setDescripcion(request.getParameter("Descripcion"));
+
+			cVo.setIDmicaso(Integer.parseInt(request.getParameter("id")));
+			cVo.setDescripcion(request.getParameter("Descripcion"));
+			if(request.getParameter("id")!=null && request.getParameter("Descripcion") !=null ) {
+
 				
 			try {
 				cDao.edit(cVo);

@@ -212,6 +212,7 @@ private void listarRoles(HttpServletRequest request, HttpServletResponse respons
 		
 	}
 
+	//este formulario es el que abre el administrador y es donde agrega al profesional
 private void abrirForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	try {
 		//para enviar a una vista particular
@@ -228,13 +229,14 @@ private void page(HttpServletRequest request, HttpServletResponse response) thro
 	try {
 		//para enviar a una vista particular
 		request.getRequestDispatcher("views/page.jsp").forward(request, response);
-		System.out.println("Formulario Rol Abierto");
+		System.out.println("pagina abierta");
 	} catch (Exception e) {
-		System.out.println("Error al abrir el formulario");
+		System.out.println("Error al abrir pagina");
 	
 	}
 		
 }
+//add profesional registro aparte
 private void abrirFormRegis(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	try {
 		//para enviar a una vista particular
@@ -246,7 +248,7 @@ private void abrirFormRegis(HttpServletRequest request, HttpServletResponse resp
 	}
 		
 }
-
+//registro de a acfectada
 private void abrirFormulario2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	try {
 		//para enviar a una vista particular
@@ -350,7 +352,7 @@ private void add(HttpServletRequest request, HttpServletResponse response) throw
 		System.out.println("el mensaje fue enviado correctamwnte"+e.getMessage());
 	}
 	try {
-		udao.registrar(r);
+		udao.registrarProf(r);
 		response.sendRedirect("RolController?accion=listarRoles");
 		System.out.println("Rol registrado");
 	}catch(Exception e) {

@@ -10,7 +10,6 @@
 	<tr>
 		<th>Id</th>
 		<th>correo</th>
-		<th>contraseña</th>
 		<th>Estado</th>
 		<th>Cargo</th>
 		<th colspan="2">Acciones</th>
@@ -21,7 +20,7 @@
 		<tr>
 			<td>${r.getIDusuario()}</td>
 			<td>${r.getCorreo()}</td>
-			<td>${r.getContraseña()} </td>
+
 			
 			<c:if test="${r.isEstado()==true}">
 				<td><span class="badge bg-success">Activo</span>
@@ -64,7 +63,7 @@ var dataTable = new DataTable("#datat", {
     perPage:5,
     labels: {
         placeholder: "Buscar...",
-        perPage: "{select} Registros por página",
+        perPage: "{select} Registros por pï¿½gina",
         noRows: "No se encontraron registros",
         info: "Mostrando {start} al {end} de {rows} registros",
     }

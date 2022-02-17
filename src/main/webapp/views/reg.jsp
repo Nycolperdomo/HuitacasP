@@ -24,7 +24,7 @@
 <form method="post" action="RolController?accion=addA" id="form">
   	
   	<div class="form-group">
-  		<label for="email">Correo</label>
+  		<label for="correo">Correo</label>
   		<input type="text" class="form-control" name="correo" id="correo" placeholder="Ingrese el correo" onchange="verifyCorreo()" required/>
   	</div>
   	

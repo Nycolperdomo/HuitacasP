@@ -75,7 +75,7 @@ if(session.getAttribute("us")!=null){
   
       </a>
       <br>
-   <a <c:if test="${us.cargo!='Cliente'}">hidden</c:if> href="MisCasosController?accion=add" class="btn btn-info">Registrar mi caso</a>
+   <a <c:if test="${us.cargo!='Cliente'}">hidden</c:if> href="MisCasosController?accion=abrirFormRegis" class="btn btn-info">Registrar mi caso</a>
    <br>
    
    <a <c:if test="${us.cargo!='Cliente'}">hidden</c:if> href="AfectadaController?accion=abrirFormRegis" class="btn btn-warning">Registrar mi informacion</a>
@@ -121,8 +121,8 @@ if(session.getAttribute("us")!=null){
           Casos
         </a>
       </li>
-        <li <c:if test="${us.cargo!='Cliente'}">hidden</c:if>>
-        <a href="#" class="nav-link text-white" >
+        <li <c:if test="${us.cargo=='Cliente'}">hidden</c:if>>
+        <a href="MisCasosController?accion=listar" class="nav-link text-white" >
           <i class="bi bi-folder-check"></i>
           Mis casos
         </a>
