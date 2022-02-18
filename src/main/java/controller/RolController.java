@@ -281,8 +281,8 @@ private void addA(HttpServletRequest request, HttpServletResponse response) thro
 	String asunto="Bienvenido A Huitacas";
 	String cuerpo="<h1> Gracias por registrarse en Huitacas </h1>"
     		+ " <img src ='https://www.clinicaveterinariaanimalandia.com/images/clinica-veterinaria-animalandia-logo.png'/>"
-    		+ " <h4> Para iniciar sesi�n </h4>"
-    		+" <a href='http://localhost:8080/practicaa1/RolController?accion=abrirLogin'>Haga click aqu�</a>";
+    		+ " <h4> Para iniciar sesiòn </h4>"
+    		+" <a href='http://localhost:8080/prac_war/RolController?accion=abrirLogin'>Haga click aquì</a>";
 	try {
 		Configmail.enviarCorreo(host, puerto, remitente, password, destinatario, asunto, cuerpo);
 		System.out.println("el mensaje fue enviado correctamwnte");
@@ -343,8 +343,8 @@ private void add(HttpServletRequest request, HttpServletResponse response) throw
 	String asunto="Bienvenido A Huitacas";
 	String cuerpo="<h1> Gracias por registrarse en Huitacas </h1>"
     		+ " <img src ='https://harmonia.la/imagen_nota/feminismo.jpg?mrf-size=m'/>"
-    		+ " <h4> Para iniciar sesi�n </h4>"
-    		+" <a href='http://localhost:8080/practicaa1/RolController?accion=abrirLogin'>Haga click aqu�</a>";
+    		+ " <h4> Para iniciar sesiòn </h4>"
+    		+" <a href='http://localhost:8080/prac_war/RolController?accion=abrirLogin'>Haga click aquì</a>";
 	try {
 		Configmail.enviarCorreo(host, puerto, remitente, password, destinatario, asunto, cuerpo);
 		System.out.println("el mensaje fue enviado correctamwnte");
