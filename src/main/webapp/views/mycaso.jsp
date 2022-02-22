@@ -9,21 +9,20 @@
 	
 	<tr>
 		<th>Id</th>
-		<th>Descripcion</th>
-		<th>Acciones</th>
+		<!--<th>Descripcion</th>
+		<th>Acciones</th>-->
+		<th>Documento Caso</th>
 	</tr>
 	<!-- el member esta request.setAttribute("member", inte);para recibir datos (controller) -->
 	<c:forEach items="${caso}" var="p">	
 		<tr>
 			<td>${p.getIDmicaso()}</td>
-			<td>${p.getDescripcion()}</td>
+			<!--TD{p.getDescripcion()}-->
+			<Td><!--aqui deberia ir el documento--></Td>
 			
-			
-			<td>
-			
-			<a class="btn btn-warning" href="MisCasosController?accion=ver&id=${p.getIDmicaso()}" role="button">Editar</a>
-			<!--invocar una funcion con onclick(borrar es el nombre de la funcion)-->
-			</td>
+			<!--<td>
+			<a class="btn btn-warning" href="MisCasosController?accion=ver&id=pesosss{p.getIDmicaso()}" role="button">Editar</a>
+			</td>-->
 		</tr>
 	</c:forEach>
 

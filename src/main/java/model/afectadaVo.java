@@ -83,9 +83,8 @@ public class afectadaVo {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public UsuarioVo getAfecUs() {
-		return afecUs;
-	}
+
+	public UsuarioVo getAfecUs() {return afecUs;}
 
 	public void setAfecUs(UsuarioVo afecUs) {
 		this.afecUs = afecUs;

@@ -72,7 +72,9 @@ public class MisCasosController extends HttpServlet {
                     case "abrirFormRegis":
                         abrirFormRegis(request, response);
                         break;
-
+                    case "abrirForm":
+                        abrirForm(request, response);
+                        break;
 
                     case "add":
                         add(request, response);
@@ -193,6 +195,17 @@ public class MisCasosController extends HttpServlet {
             System.out.println("Formulario MY caso Abierto");
         } catch (Exception e) {
             System.out.println("Error al abrir el formulario MYcaso");
+
+        }
+
+    }
+
+    private void abrirForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            request.getRequestDispatcher("views/VerCasos.jsp").forward(request, response);
+            System.out.println("Formulario ver Abierto");
+        } catch (Exception e) {
+            System.out.println("Error al abrir el formulario ");
 
         }
 

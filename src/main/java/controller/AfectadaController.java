@@ -108,7 +108,7 @@ public class AfectadaController extends HttpServlet {
 		//Crear objeto de tipo ServletOutputStream
 		ServletOutputStream out = response.getOutputStream();
         try {
-        	//Declarar variables de imágenes y de reporte con sus rutas en webapp
+        	//Declarar variables de imï¿½genes y de reporte con sus rutas en webapp
             java.io.InputStream logo = this.getServletConfig()
                     .getServletContext()
                     .getResourceAsStream("reportes/img/logo.jpg");
@@ -126,13 +126,13 @@ public class AfectadaController extends HttpServlet {
                 //Declarar variable ds para asignar el reporteUsuario1
                 JRBeanArrayDataSource ds = new JRBeanArrayDataSource(reporteAfectadas1.toArray());
                 
-                //Mapeamos los parámetros del Jasper reports
+                //Mapeamos los parï¿½metros del Jasper reports
                 Map<String, Object> parameters = new HashMap();
                 parameters.put("ds", ds);
                 parameters.put("logo", logo);
                 //Formateamos la salida del reporte
                 response.setContentType("application/pdf");
-                //Para abrir el reporte en otra pestaña
+                //Para abrir el reporte en otra pestaï¿½a
                 response.addHeader("Content-disposition", "inline; filename=ReporteAfectadas.pdf");
                 //Imprimimos el reporte
                 JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, ds);
@@ -148,7 +148,7 @@ public class AfectadaController extends HttpServlet {
             }
         } catch (Exception e) {
             response.setContentType("text/plain");
-            out.print("ocurrió un error al intentar generar el reporte:" + e.getMessage());
+            out.print("ocurriï¿½ un error al intentar generar el reporte:" + e.getMessage());
             e.printStackTrace();
         }
 	}
@@ -161,11 +161,12 @@ public class AfectadaController extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-	
-	
-	
+
+
+
 private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+	System.out.println("Entramos al mÃ©todo listar");
 		try {
 			//(para que del modelo suba al controlador)
 			List afect= aDao.listar();
@@ -273,7 +274,7 @@ private void edit(HttpServletRequest request, HttpServletResponse response) thro
 		aVo.setNumeroDocumento(request.getParameter("numeroDocumento"));
 		aVo.setFechaNacimiento(request.getParameter("fechaNacimiento"));
 		//aVo.getAfecUs().setCorreo(request.getParameter("correo"));
-		//aVo.getAfecUs().setContraseña(request.getParameter("contrasena"));
+		//aVo.getAfecUs().setContraseï¿½a(request.getParameter("contrasena"));
 		//aVo.getAfecUs().setCargo(request.getParameter("cargo"));
 	}
 	

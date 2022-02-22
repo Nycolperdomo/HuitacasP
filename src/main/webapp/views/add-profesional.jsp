@@ -20,6 +20,11 @@
 			<label for="telefono">Telefono</label> 
 			<input class="form-control" type="number" name="telefono" placeholder="Ingrese su Numero de Telefono" required>
 		</div>
+		<div class="form-group">
+			<label for="correo">Correo</label>
+			<input class="form-control" type="email" name="correo" placeholder="Ingrese su correo " required>
+		</div>
+
 
 		<div class="form-group">
 			<label for="tipoDocumento">Tipo Documento</label>
@@ -52,8 +57,8 @@
 
 
 		<!--  <div class="form-group">
-			<label for="password">Contraseña</label> 
-			<input class="form-control" type="password" name="password" placeholder="Ingrese su Contraseña">
+			<label for="password">Contraseï¿½a</label> 
+			<input class="form-control" type="password" name="password" placeholder="Ingrese su Contraseï¿½a">
 		</div>
 		
 		<!-- ESTE ES UN EJEMPLO DONDE SE TRAEN DATOS DE ROL (DATOS RELACIONADOS) 

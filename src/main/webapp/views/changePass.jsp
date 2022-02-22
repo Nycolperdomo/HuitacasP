@@ -1,31 +1,31 @@
 <%@include file="header.jsp" %>
 <div class="flex-fill flex-grow-1 ms-3">
 
-<h1>Actualizar Contraseña</h1>
+<h1>Actualizar Contrasena</h1>
 
 <form method="post" action="RolController?accion=changePass">
   	
   	<div class="form-group">
   		<label for="id">Id Documento</label>
   		<input type="hidden" class="form-control" name="id" id="id" value="${us.IDusuario}"/>
-  		<input type="hidden" class="form-control" name="passu" id="passu" value="${us.contraseña}"/>
+  		<input type="hidden" class="form-control" name="passu" id="passu" value="${us.contrasena}"/>
   		
   	</div>
   	
   		<div class="form-group">
   		<label for="passant">Password Actual</label><br>
-  		<input type="password" class="form-control" onchange="verifyPass()" name="passant" id="passant" placeholder="Ingrese la contraseña actual"/>
+  		<input type="password" class="form-control" onchange="verifyPass()" name="passant" id="passant" placeholder="Ingrese la contrasena actual"/>
   	</div>
   	
   		<div class="form-group">
   		<label for="passnew">Password Nuevo</label><br>
-  		<input type="password" class="form-control" onchange="verificarPass()" name="passnew" id="passnew" placeholder="Ingrese la contraseña nueva"/>
+  		<input type="password" class="form-control" onchange="verificarPass()" name="passnew" id="passnew" placeholder="Ingrese la contrasena nueva"/>
   	</div>
   	
   	
   		<div class="form-group">
   		<label for="passnew2">Confirma Password Nuevo</label><br>
-  		<input type="password" class="form-control" name="passnew2" id="passnew2" placeholder="Confirme la contraseña nueva"/>
+  		<input type="password" class="form-control" name="passnew2" id="passnew2" placeholder="Confirme la contraseï¿½a nueva"/>
   	</div>
   	
 		<div class="form-group">
@@ -45,9 +45,9 @@ function verifyPass(){
 	const passant=document.getElementById("passant");
 	
 	if(passus.value==passant.value){
-		alert("La contraseña actual se ha confirmado");
+		alert("La contraseï¿½a actual se ha confirmado");
 	}else{
-		alert("Las contraseñas no coinciden con la base de datos");
+		alert("Las contraseï¿½as no coinciden con la base de datos");
 		passant.focus();
 		passant.value="";
 	}
@@ -60,9 +60,9 @@ function vericarPass(){
 	const passnew2=document.getElementById("passnew2");
 	
 	if(passnew.value==passnew2.value){
-		alert("Las contraseñas coinciden");
+		alert("Las contraseï¿½as coinciden");
 	}else{
-		alert("Las contraseñas no coinciden");
+		alert("Las contraseï¿½as no coinciden");
 		passant.focus();
 		passant.value="";
 	}

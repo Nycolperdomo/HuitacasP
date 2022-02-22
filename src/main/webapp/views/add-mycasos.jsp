@@ -9,7 +9,7 @@
 		<input type="text" class="form-control" name="nombre" id="nombre">
 	</div>
   	<div class="form-group">
-  		<label for="descripcion">Descripcion</label>
+  		<label for="descripcion">Descripcion/Tipo de ayuda que solicita</label>
   		<input type="text" class="form-control" name="descripcion" id="descripcion">
   	</div>
 

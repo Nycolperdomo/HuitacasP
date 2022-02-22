@@ -7,10 +7,10 @@ public class casoVo {
 	private int IDcaso;
 	private Boolean estado ;
 	private String fechaInicio, fechaFin;
-	
 
 	private tipoAbusoVo abuCas;
 	private tipoAsesoriaVo aseCas;
+	private  profesionalVo profCaso;
 	
 	
 	
@@ -20,7 +20,7 @@ public class casoVo {
 
 
 	public casoVo(int iDcaso, Boolean estado, String fechaInicio, String fechaFin, tipoAbusoVo abuCas,
-			tipoAsesoriaVo aseCas) {
+			tipoAsesoriaVo aseCas, profesionalVo profCaso) {
 		super();
 		IDcaso = iDcaso;
 		this.estado = estado;
@@ -28,6 +28,7 @@ public class casoVo {
 		this.fechaFin = fechaFin;
 		this.abuCas = abuCas;
 		this.aseCas = aseCas;
+		this.profCaso = profCaso;
 		
 	}
 
@@ -100,6 +101,12 @@ public class casoVo {
 	public String getEstadoRep() {
 		return this.estado ? "Activo" : "Inactivo";
 	}
-	
-	
+
+	public profesionalVo getProfCaso() {
+		return profCaso;
+	}
+
+	public void setProfCaso(profesionalVo profCaso) {
+		this.profCaso = profCaso;
+	}
 }

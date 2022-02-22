@@ -28,8 +28,9 @@ public class afectadaDao {
 		
 		public List listar() throws SQLException {
 			List <afectadaVo> afectada = new ArrayList<>();
-			sql ="SELECT IDafectada,nombre,apellido,telefono,tipoDocumento,numeroDocumento,fechaNacimiento FROM afectada;";
-//			sql = "SELECT IDafectada,nombre,apellido,telefono,tipoDocumento,numeroDocumento,fechaNacimiento,correo,estado FROM afectada JOIN usuario on usuario.IDusuario = afectada.IDafectada;";
+			sql = "SELECT IDafectada,nombre,apellido,telefono,tipoDocumento,numeroDocumento,fechaNacimiento,correo,estado FROM afectada JOIN usuario on usuario.IDusuario = afectada.IDafectada;";
+		// "SELECT IDafectada,nombre,apellido,telefono,tipoDocumento,numeroDocumento,fechaNacimiento FROM afectada;";
+			//sql = "	SELECT IDafectada,nombre,apellido,telefono,tipoDocumento,numeroDocumento,fechaNacimiento,correo,estado FROM afectada JOIN usuario on usuario.IDusuario = afectada.IDafectada;";
 			try {
 				con= Conexion.conectar();//abriendo la conexion a la bd
 				ps= con.prepareStatement(sql);//preparar sentencia
@@ -44,8 +45,8 @@ public class afectadaDao {
 					a.setNumeroDocumento(rs.getString(6));
 					a.setFechaNacimiento(rs.getString(7));
 					a.setAfecUs(new UsuarioVo());
-					//a.getAfecUs().setCorreo(rs.getString(8));
-					//a.getAfecUs().setEstado(rs.getBoolean(9));
+					a.getAfecUs().setCorreo(rs.getString(8));
+					a.getAfecUs().setEstado(rs.getBoolean(9));
 					// asi no se hace u.setDescripcionRol(rs.getString(10));
 					//otra forma de hacerlo
 					//r.setIdRol(rs.getInt("idRol"));
@@ -150,6 +151,10 @@ public int changeEstado(afectadaVo a) throws SQLException {
 	return row;//Retorna cantidad de filas afectadas
 }
 */
+	/*public afectadaVo verMicaso(int id) throws SQLException{
+		afectadaVo r= new afectadaVo();
+		sql = "SELECT * FROM afectada where IDafectada="+id;
+	}*/
 public afectadaVo consultaId(int id) throws SQLException {
 	afectadaVo r= new afectadaVo();
 	sql = "SELECT * FROM afectada where IDafectada="+id;
@@ -196,9 +201,9 @@ sql="UPDATE afectada SET nombre=?,apellido=?,telefono=?,tipoDocumento=?,numeroDo
 		//falta correo y contrase�a ps.setInt(7, p.getProUs().getIDusuario());
 		ps.setString(6, r.getFechaNacimiento());
 		//get usuario o get correo y contrase�a
-		/*ps.setString(7, r.getAfecUs().getCorreo());
-		ps.setString(8, r.getAfecUs().getContrase�a());
-	*/
+		ps.setString(7, r.getAfecUs().getCorreo());
+		ps.setString(8, r.getAfecUs().getContrasena());
+
 		
 		System.out.println(ps);
 		ps.executeUpdate();//Ejeuci�n de la sentencia	
@@ -216,6 +221,7 @@ sql="UPDATE afectada SET nombre=?,apellido=?,telefono=?,tipoDocumento=?,numeroDo
 
 public int registrar(afectadaVo r) throws SQLException {
 	sql="INSERT INTO afectada (nombre,apellido,telefono,tipoDocumento,numeroDocumento,fechaNacimiento) VALUES(?,?,?,?,?,?)";
+	//sql="INSERT INTO afectada (nombre,apellido,telefono,tipoDocumento,numeroDocumento,fechaNacimiento,IDusuario) VALUES(?,?,?,?,?,?,?,?)";
 	try {
 		con= Conexion.conectar();//abriendo la conexion a la bd
 		ps= con.prepareStatement(sql);//preparar sentencia
@@ -225,6 +231,8 @@ public int registrar(afectadaVo r) throws SQLException {
 		ps.setString(4, r.getTipoDocumento());
 		ps.setString(5, r.getNumeroDocumento());
 		ps.setString(6, r.getFechaNacimiento());
+		//ps.setInt(7, r.getAfecUs().getIDusuario());
+
 	
 		System.out.println(ps);
 		ps.executeUpdate();//ejecucion de la sentencia sentencias dif a consulta

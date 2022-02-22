@@ -32,10 +32,10 @@
 			<td>${a.getTipoDocumento()}</td>
 			<td>${a.getNumeroDocumento()}</td>
 			<td>${a.getFechaNacimiento()}</td>
-			<td></td>
-			<td></td>
+			<td>${a.afecUs.correo}</td>
+
 			<!-- para poner el estado de la tabla que esta relacionada -->
-		<!--  	<td>${a.afecUs.correo}</td>
+
 			
 			<c:if test="${a.afecUs.isEstado()==true}">
 				<td><span class="badge bg-success">Activo</span>

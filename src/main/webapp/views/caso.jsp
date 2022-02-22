@@ -14,8 +14,10 @@
 		<th>Fecha Fin</th>
 		<th>Estado</th>
 		<th>Tipo<br>Asesoria</th>
-	<th>Profesional <br> a cargo</th>
-		<th></th>
+		<th>Profesional <br> a cargo</th>
+		<th>Afectada <br> a tratar</th>
+
+
 		<th colspan="2">Acciones</th>
 	</tr>
 	<!-- el member esta request.setAttribute("member", inte);para recibir datos (controller) -->
@@ -24,8 +26,6 @@
 			<td>${a.getIDcaso()}</td>
 			<td>${a.getFechaInicio()}</td>
 			<td>${a.getFechaFin()}</td>
-		
-		
 			<c:if test="${a.isEstado()==true}">
 				<td><span class="badge bg-success">Activo</span>
 					<a class="btn btn-danger btn-sm" onclick="changeEstado(event,${a.getIDcaso()},${a.isEstado()},'Caso')" role="button">Inactivar</a>
@@ -40,6 +40,8 @@
 			</c:if>
 			
 			<td>${a.aseCas.tipo}</td>
+			<!--profesional a cargo-->
+			<td>${a.profCaso.nombre}</td>
 			<td></td>
 			<td>
 			<a class="btn btn-warning" href="CasoController?accion=ver&id=${a.getIDcaso()}" role="button">Editar</a>

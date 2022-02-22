@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 public class Conexion {
 
 	//definicion de atributos de la conexion
-	private static final String bd = "jdbc:mysql://localhost:3307/huitacas";
+	private static final String bd = "jdbc:mysql://localhost:3307/huitacass";
 	private static final String usuario ="root";
 	private static final String clave ="";
 

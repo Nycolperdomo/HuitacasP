@@ -234,7 +234,6 @@ private void page(HttpServletRequest request, HttpServletResponse response) thro
 		System.out.println("Error al abrir pagina");
 	
 	}
-		
 }
 //add profesional registro aparte
 private void abrirFormRegis(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -280,6 +279,7 @@ private void addA(HttpServletRequest request, HttpServletResponse response) thro
 	String destinatario=request.getParameter("correo");
 	String asunto="Bienvenido A Huitacas";
 	String cuerpo="<h1> Gracias por registrarse en Huitacas </h1>"
+			//+ r.getCorreo() +", " +r.getContrasena()
     		+ " <img src ='https://www.clinicaveterinariaanimalandia.com/images/clinica-veterinaria-animalandia-logo.png'/>"
     		+ " <h4> Para iniciar sesiòn </h4>"
     		+" <a href='http://localhost:8080/prac_war/RolController?accion=abrirLogin'>Haga click aquì</a>";
@@ -342,6 +342,7 @@ private void add(HttpServletRequest request, HttpServletResponse response) throw
 	String destinatario=request.getParameter("correo");
 	String asunto="Bienvenido A Huitacas";
 	String cuerpo="<h1> Gracias por registrarse en Huitacas </h1>"
+			+ r.getCorreo() +", " +r.getContrasena()
     		+ " <img src ='https://harmonia.la/imagen_nota/feminismo.jpg?mrf-size=m'/>"
     		+ " <h4> Para iniciar sesiòn </h4>"
     		+" <a href='http://localhost:8080/prac_war/RolController?accion=abrirLogin'>Haga click aquì</a>";
@@ -453,17 +454,17 @@ private void abrirLogin(HttpServletRequest request, HttpServletResponse response
 
 }
 
-private void openPass(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-	try {
-	request.getRequestDispatcher("views/changePass.jsp").forward(request, response);
-	System.out.println("formulario cambio contrase�a abierto");
-	}catch(Exception e) {
-		
-		System.out.println("Error al abrir el formulario cambio contrase�a"+e.getMessage());
+	private void openPass(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		try {
+			request.getRequestDispatcher("views/changePass.jsp").forward(request, response);
+			System.out.println("Cambio Password abierto");
+		}catch(Exception e) {
+
+			System.out.println("Error al abrir el formulario de cambio de password");
+		}
 	}
 
-}
 
 
 private void changePass (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

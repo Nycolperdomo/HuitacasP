@@ -25,13 +25,13 @@
   	
   	<div class="form-group">
   		<label for="correo">Correo</label>
-  		<input type="text" class="form-control" name="correo" id="correo" placeholder="Ingrese el correo" onchange="verifyCorreo()" required/>
+  		<input type="email" class="form-control" name="correo" id="correo" placeholder="Ingrese el correo" onchange="verifyCorreo()" required/>
   	</div>
   	
   <div id="validarC" class="text-danger"></div>	
   	
   		<div class="form-group">
-  		<label for="password">Contraseña</label><br>
+  		<label for="contrasena">Contraseña</label><br>
   		<input type="password" class="form-control" name="contrasena" id="contrasena" placeholder="Ingrese la contraseña" required/>
   	</div>
   	
@@ -108,9 +108,7 @@
 <br>
 <button type="submit" class="btn btn-primary">Guardar</button>
 </div>
-  
-  </div>
- 
+
   
 
 

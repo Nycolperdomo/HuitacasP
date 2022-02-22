@@ -118,15 +118,22 @@ if(session.getAttribute("us")!=null){
       <li <c:if test="${us.cargo=='Cliente'}">hidden</c:if>>
         <a href="CasoController?accion=listar" class="nav-link text-white" >
           <i class="bi bi-folder-check"></i>
-          Casos
+          Asignar Casos
         </a>
       </li>
         <li <c:if test="${us.cargo=='Cliente'}">hidden</c:if>>
-        <a href="MisCasosController?accion=listar" class="nav-link text-white" >
+        <a href="MisCasosController?accion=abrirForm" class="nav-link text-white" >
           <i class="bi bi-folder-check"></i>
-          Mis casos
+          Ver CasosPDF
         </a>
       </li>
+         </li>
+         <li <c:if test="${us.cargo!='Cliente'}">hidden</c:if>>
+           <a href="MisCasosController?accion=listar" class="nav-link text-white" >
+             <i class="bi bi-folder-check"></i>
+             Mis casos
+           </a>
+         </li>
       <li <c:if test="${us.cargo!='Cliente'}">hidden</c:if>>
         <a href="#" class="nav-link text-white">
           <i class="bi bi-folder-check"></i>

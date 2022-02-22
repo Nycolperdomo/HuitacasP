@@ -1,6 +1,8 @@
 package model;
 
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -260,7 +262,8 @@ public UsuarioVo validarUsuario(String correo,String passw) throws SQLException 
 		while(rs.next()) {
 			u.setIDusuario(rs.getInt(1));
 			u.setCorreo(rs.getString(2));
-			u.setContrasena(rs.getString(3));
+			u.setContrasena(getMD5(rs.getString(3)));
+//			u.setContrasena(rs.getString(3));
 			u.setEstado(rs.getBoolean(4));
 			u.setCargo(rs.getString(5));
 		}
@@ -279,7 +282,7 @@ public int changePassword(UsuarioVo us) throws SQLException {
 	sql="UPDATE usuario SET contrasena=? WHERE IDusuario="+us.getIDusuario();
 	
 	try {
-	con= Conexion.conectar();
+	con=c.conectar();
 	ps=con.prepareStatement(sql);
 	ps.setString(1, us.getContrasena());
 	System.out.println(ps);
@@ -365,6 +368,22 @@ static String generaContrasena() {
 	return contrasena.toString();
 }
 
+
+	public String getMD5(String input) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] encBytes = md.digest(input.getBytes());
+			BigInteger numero = new BigInteger(1, encBytes);
+			String encString = numero.toString(16);
+			while (encString.length() < 32) {
+				encString = "0"+encString;
+			}
+			return encString;
+		} catch (Exception e) {
+			System.out.println("enctriptacion error "+e);
+			throw new RuntimeException(e);
+		}
+	}
 }
 
 
