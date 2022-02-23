@@ -5,17 +5,18 @@ import java.sql.Date;
 public class afectadaVo {
 
 	private int IDafectada;
-	private String fechaNacimiento,nombre,apellido,telefono,tipoDocumento,numeroDocumento;
+	private String fechaNacimiento,nombre,apellido,numeroDocumento,cargo,correo,contrasena;
 	//private Date ;
+	private boolean estado;
 	
-	private UsuarioVo afecUs;
+	//private UsuarioVo afecUs;
 	
 	public afectadaVo () {
 		
 	}
-
-	public afectadaVo(int iDafectada, String nombre, String apellido, String telefono, String tipoDocumento,
-			String numeroDocumento, String fechaNacimiento, UsuarioVo afecUs) {
+/*
+	public afectadaVo(int iDafectada, String nombre, String apellido,
+			String numeroDocumento, String fechaNacimiento, ) {
 		super();
 		IDafectada = iDafectada;
 		this.nombre = nombre;
@@ -25,6 +26,51 @@ public class afectadaVo {
 		this.numeroDocumento = numeroDocumento;
 		this.fechaNacimiento = fechaNacimiento;
 		this.afecUs = afecUs;
+	}
+*/
+
+	public afectadaVo(int IDafectada, String fechaNacimiento, String nombre, String apellido, String numeroDocumento, String cargo, String correo, String contrasena, boolean estado) {
+		this.IDafectada = IDafectada;
+		this.fechaNacimiento = fechaNacimiento;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.numeroDocumento = numeroDocumento;
+		this.cargo = cargo;
+		this.correo = correo;
+		this.contrasena = contrasena;
+		this.estado = estado;
+	}
+
+	public String getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+	public String getContrasena() {
+		return contrasena;
+	}
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
+	}
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 
 	public int getIDafectada() {
@@ -51,22 +97,6 @@ public class afectadaVo {
 		this.apellido = apellido;
 	}
 
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
-	public String getTipoDocumento() {
-		return tipoDocumento;
-	}
-
-	public void setTipoDocumento(String tipoDocumento) {
-		this.tipoDocumento = tipoDocumento;
-	}
-
 	public String getNumeroDocumento() {
 		return numeroDocumento;
 	}
@@ -84,11 +114,6 @@ public class afectadaVo {
 	}
 
 
-	public UsuarioVo getAfecUs() {return afecUs;}
-
-	public void setAfecUs(UsuarioVo afecUs) {
-		this.afecUs = afecUs;
-	}
 	
 	/*public String getAfecUsRep() {
 		return this.afecUs ? "Activo" : "Inactivo" this.afecUs.isEstado() : "--";

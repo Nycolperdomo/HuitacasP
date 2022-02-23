@@ -5,16 +5,17 @@ import java.util.Date;
 public class profesionalVo {
 
 	private int IDprofesional;
-	private String 	fechaNacimiento,nombre,apellido,telefono,correo,tipoDocumento,numeroDocumento;
+	private String 	nombre,apellido,correo,contrasena,numeroDocumento,cargo;
 	//private Date fechaNacimiento ;
+	private boolean estado;
 	
-	private UsuarioVo proUs;
+
 	
 	public profesionalVo() {
 		
 	}
 
-
+/*
 	public profesionalVo(int iDprofesional, String nombre, String apellido, String telefono, String correo,
 			String tipoDocumento, String numeroDocumento, String fechaNacimiento, UsuarioVo proUs) {
 		super();
@@ -28,7 +29,18 @@ public class profesionalVo {
 		this.fechaNacimiento = fechaNacimiento;
 		this.proUs = proUs;
 	}
+*/
 
+	public profesionalVo(int IDprofesional, String fechaNacimiento, String nombre, String apellido, String correo, String contrasena, String numeroDocumento, String cargo, boolean estado) {
+		this.IDprofesional = IDprofesional;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.correo = correo;
+		this.contrasena = contrasena;
+		this.numeroDocumento = numeroDocumento;
+		this.cargo = cargo;
+		this.estado = estado;
+	}
 
 	public int getIDprofesional() {
 		return IDprofesional;
@@ -54,29 +66,6 @@ public class profesionalVo {
 		this.apellido = apellido;
 	}
 
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
-	public String getCorreo() {
-		return correo;
-	}
-
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
-
-	public String getTipoDocumento() {
-		return tipoDocumento;
-	}
-
-	public void setTipoDocumento(String tipoDocumento) {
-		this.tipoDocumento = tipoDocumento;
-	}
 
 	public String getNumeroDocumento() {
 		return numeroDocumento;
@@ -86,24 +75,36 @@ public class profesionalVo {
 		this.numeroDocumento = numeroDocumento;
 	}
 
-	public String getFechaNacimiento() {
-		return fechaNacimiento;
+
+	public String getCorreo() {
+		return correo;
 	}
 
-	public void setFechaNacimiento(String fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
-	public UsuarioVo getProUs() {
-		return proUs;
+	public String getContrasena() {
+		return contrasena;
 	}
 
-	public void setProUs(UsuarioVo proUs) {
-		this.proUs = proUs;
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 
+	public String getCargo() {
+		return cargo;
+	}
 
-	
-	
-	
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
 }

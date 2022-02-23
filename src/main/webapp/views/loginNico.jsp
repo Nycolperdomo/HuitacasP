@@ -20,16 +20,14 @@
 <div class="card">
 <article class="card-body">
 <h4 class="card-title mb-4 mt-1">Iniciar sesion</h4>
-	 <form method="post" action="RolController?accion=login">
+	 <form method="post" action="AfectadaController?accion=login">
     <div class="form-group">
     	<label for="correo" class="form-label">Correo</label>
     	<div class="input-group">
       <div class="input-group-text">@</div>
       <input type="email" class="form-control" placeholder="correo" id="correo" name="correo" autofocus required>
     </div>
-    	
-    	
- 
+
     <div class="form-group">
     
     	<label for="password" class="form-label">Contraseña</label>
@@ -47,7 +45,7 @@
         <button type="submit" class="btn btn-primary btn-block"> Iniciar sesion</button>
         
 	<!-- <button  href="RolController?accion=registrar" type="submit" class="btn btn-success btn-block"> Crear Cuenta</button> -->
-	<a href="RolController?accion=abrirFormulario2" class="btn btn-success btn-block" role="button">Crear cuenta Cliente</a>
+	<a href="AfectadaController?accion=abrirFormulario2" class="btn btn-success btn-block" role="button">Crear cuenta Cliente</a>
 		
     </div> <!-- form-group// -->                                                           
 </form>

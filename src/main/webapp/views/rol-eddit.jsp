@@ -17,8 +17,8 @@
   	</div>
   	
   	<div class="form-group">
-  		<label for="correo">Contraseña</label>
-  		<input type="password" class="form-control" name="password" id="password" placeholder="Ingrese la contraseña" value="${roles.contraseña}"/>
+  		<label for="correo">ContraseÃ±a</label>
+  		<input type="password" class="form-control" name="password" id="password" placeholder="Ingrese la contraseï¿½a" value="${roles.contraseï¿½a}"/>
   	</div>
   	
   	
@@ -46,7 +46,7 @@
 <div>
 <button type="submit" class="btn btn-primary">Guardar</button>
 </div>
-  
+
   </form>
 
 </div>

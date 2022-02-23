@@ -49,8 +49,9 @@ public class ProfesionalController extends HttpServlet {
 	try {
 		if (accion != null) {
 			switch (accion) {
-			
 
+				case "abrirLogin":
+					abrirLogin(request, response);
 			case "listar":
 				listar(request, response);
 				break;
@@ -62,9 +63,12 @@ public class ProfesionalController extends HttpServlet {
 			case "delete":
 				delete(request,response);
 				break;
-			case "add":
+			/*case "add":
 				add(request,response);
 				break;
+				case "edit":
+					edit(request,response);
+					break;*/
 			case "changeEstado":
 				changeEstado(request,response);
 				break;
@@ -72,9 +76,7 @@ public class ProfesionalController extends HttpServlet {
 			case "ver":
 				ver(request,response);
 				break;
-			case "edit":
-				edit(request,response);
-			break;
+
 			default:
 				response.sendRedirect("login.jsp");
 			}
@@ -132,7 +134,7 @@ private void abrirFormRegis(HttpServletRequest request, HttpServletResponse resp
 
 private void obtenerCargo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	System.out.println("Entramos al método obtener cargos");
+	System.out.println("Entramos al mï¿½todo obtener cargos");
 	cargoDao cdao=new cargoDao();
 	List<cargoVo> cargo=null;
 	
@@ -167,7 +169,7 @@ private void add(HttpServletRequest request, HttpServletResponse response) throw
 		
 	}
 
-*/
+
 
 private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
@@ -208,9 +210,9 @@ private void add(HttpServletRequest request, HttpServletResponse response) throw
 
 
 
-/*private void obtenerUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+private void obtenerUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	System.out.println("Entramos al método obtener usuarios");
+	System.out.println("Entramos al mï¿½todo obtener usuarios");
 	UsuarioDao udao=new UsuarioDao();
 	List<UsuarioVo> usu=null;
 	
@@ -239,7 +241,7 @@ private void add(HttpServletRequest request, HttpServletResponse response) throw
 	}
 	
 	//if(request.getParameter("contrasena") !=null) {
-		//pVo.setContraseña(request.getParameter("contrasena"));
+		//pVo.setContraseï¿½a(request.getParameter("contrasena"));
 	//}
 	
 	try {
@@ -251,7 +253,34 @@ private void add(HttpServletRequest request, HttpServletResponse response) throw
 		System.out.println("Error al abrir el formulario profesional");
 	}
 }
-	
+
+private void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	if(request.getParameter("id")!=null && request.getParameter("nombre") !=null && request.getParameter("apellido")!=null) {
+
+		pVo.setIDprofesional(Integer.parseInt(request.getParameter("id")));
+		pVo.setNombre(request.getParameter("nombre"));
+		pVo.setApellido(request.getParameter("apellido"));
+		pVo.setTelefono(request.getParameter("telefono"));
+		pVo.setTipoDocumento(request.getParameter("tipoDocumento"));
+		pVo.setNumeroDocumento(request.getParameter("numeroDocumento"));
+		pVo.setFechaNacimiento(request.getParameter("fechaNacimiento"));
+	/*	pVo.getProUs().setCorreo(request.getParameter("correo"));
+		pVo.getProUs().setContraseï¿½a(request.getParameter("password"));
+		pVo.getProUs().setCargo(request.getParameter("cargo"));
+
+}
+
+	try {
+			pDao.edit(pVo);
+			response.sendRedirect("ProfesionalController?accion=listar");
+			System.out.println("Profesional cambiado");
+			}catch(Exception e) {
+
+			System.out.println("Error al cambiar el Profesional");
+			}
+			}
+
 */
 private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
@@ -307,32 +336,6 @@ private void ver(HttpServletRequest request, HttpServletResponse response) throw
 		}
 	
 	}
-private void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-	if(request.getParameter("id")!=null && request.getParameter("nombre") !=null && request.getParameter("apellido")!=null) {
-		
-		pVo.setIDprofesional(Integer.parseInt(request.getParameter("id")));
-		pVo.setNombre(request.getParameter("nombre"));
-		pVo.setApellido(request.getParameter("apellido"));
-		pVo.setTelefono(request.getParameter("telefono"));
-		pVo.setTipoDocumento(request.getParameter("tipoDocumento"));
-		pVo.setNumeroDocumento(request.getParameter("numeroDocumento"));
-		pVo.setFechaNacimiento(request.getParameter("fechaNacimiento"));
-	/*	pVo.getProUs().setCorreo(request.getParameter("correo"));
-		pVo.getProUs().setContraseña(request.getParameter("password"));
-		pVo.getProUs().setCargo(request.getParameter("cargo"));
-		*/
-	}
-	
-	try {
-		pDao.edit(pVo);
-		response.sendRedirect("ProfesionalController?accion=listar");
-		System.out.println("Profesional cambiado");
-	}catch(Exception e) {
-		
-		System.out.println("Error al cambiar el Profesional");
-	}
-}
 
 
 }

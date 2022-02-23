@@ -1,4 +1,4 @@
-package controller;
+/*package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,6 +21,7 @@ import model.UsuarioDao;
 /**
  * Servlet implementation class RolController
  */
+/*
 @WebServlet("/RolController")
 public class RolController extends HttpServlet {
 	
@@ -36,7 +37,7 @@ public class RolController extends HttpServlet {
 		remitente=contexto.getInitParameter("remitente");
 		password=contexto.getInitParameter("contexto");
 	}*/
-	
+/*
 	public void init() {
 		ServletContext contexto=getServletContext();
 		host=contexto.getInitParameter("host");
@@ -53,7 +54,7 @@ public class RolController extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-	
+/*
     public RolController() {
         super();
         // TODO Auto-generated constructor stub
@@ -62,7 +63,7 @@ public class RolController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/*	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	
@@ -184,7 +185,7 @@ public class RolController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/*	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	
@@ -535,5 +536,5 @@ private void validarCorreo(HttpServletRequest request, HttpServletResponse respo
 	
 }
 
-
 }
+*/

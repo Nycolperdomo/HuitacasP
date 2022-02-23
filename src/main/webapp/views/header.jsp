@@ -86,13 +86,13 @@ if(session.getAttribute("us")!=null){
  	<br>
  	<a href="RolController?accion=openPass" class="btn btn-outline-info">Cambiar Contraseña</a>
  	<br>
-  <a href="RolController?accion=logout" class="btn btn-outline-danger">Cerrar Sesion</a>
+  <a href="AfectadaController?accion=logout" class="btn btn-outline-danger">Cerrar Sesion</a>
     <hr>
        <br>
  	<a href="TipoAbusoController?accion=abrirTAb" <c:if test="${us.cargo=='Cliente'}">hidden</c:if> class="btn btn-outline-info">Tipo Abuso</a>
  	<br>
     <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item" <c:if test="${us.cargo=='Cliente'}">hidden</c:if>>
+      <!--<li class="nav-item" <cif test="{us.cargo=='Cliente'}">hidden</cif>>-->
         <a href="AfectadaController?accion=listar" class="nav-link active" aria-current="page">
          <i class="bi bi-people-fill"></i>
           Afectadas

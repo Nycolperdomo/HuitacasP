@@ -213,9 +213,7 @@ public UsuarioVo consultaId(int id) throws SQLException {
 		
 		ps.close();
 		
-	} catch (Exception e) {
-		// TODO: handle exception
-
+	} catch (Exception e){
 		System.out.println("conexion no exitosa"+e.getMessage());
 	}
 	finally {

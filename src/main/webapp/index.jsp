@@ -48,9 +48,9 @@
         <div class="container">
             <div class="title font-weight-bold">
                 Registrate Ahora!<br>Informate con nosotros!<br>
-                <a href="RolController?accion=abrirFormulario2" class="btn btn-success">Registrate ahora</a>
+                <a href="AfectadaController?accion=abrirFormulario2" class="btn btn-success">Registrate ahora</a>
                 
-<a href="RolController?accion=abrirLogin" class="btn  btn-success" role="button">login</a>
+<a href="AfectadaController?accion=abrirLogin" class="btn  btn-success" role="button">login</a>
             </div>
         </div>
     </header>

@@ -23,14 +23,14 @@ public class afectadaDao {
 		int row;
 		
 		Conexion c= new Conexion();
-		
-		//metodos
-		
+
 		public List listar() throws SQLException {
 			List <afectadaVo> afectada = new ArrayList<>();
-			sql = "SELECT IDafectada,nombre,apellido,telefono,tipoDocumento,numeroDocumento,fechaNacimiento,correo,estado FROM afectada JOIN usuario on usuario.IDusuario = afectada.IDafectada;";
+			//sql = "SELECT IDafectada,nombre,apellido,telefono,tipoDocumento,numeroDocumento,fechaNacimiento,correo,estado FROM afectada JOIN usuario on usuario.IDusuario = afectada.IDafectada;";
 		// "SELECT IDafectada,nombre,apellido,telefono,tipoDocumento,numeroDocumento,fechaNacimiento FROM afectada;";
 			//sql = "	SELECT IDafectada,nombre,apellido,telefono,tipoDocumento,numeroDocumento,fechaNacimiento,correo,estado FROM afectada JOIN usuario on usuario.IDusuario = afectada.IDafectada;";
+			sql="SELECT IDafectada,nombre,apellido,correo,estado FROM afectada;";
+
 			try {
 				con= Conexion.conectar();//abriendo la conexion a la bd
 				ps= con.prepareStatement(sql);//preparar sentencia
@@ -40,13 +40,11 @@ public class afectadaDao {
 					a.setIDafectada(rs.getInt(1));
 					a.setNombre(rs.getString(2));
 					a.setApellido(rs.getString(3));
-					a.setTelefono(rs.getString(4));
-					a.setTipoDocumento(rs.getString(5));
-					a.setNumeroDocumento(rs.getString(6));
-					a.setFechaNacimiento(rs.getString(7));
-					a.setAfecUs(new UsuarioVo());
-					a.getAfecUs().setCorreo(rs.getString(8));
-					a.getAfecUs().setEstado(rs.getBoolean(9));
+					a.setCorreo(rs.getString(4));
+					a.setEstado(rs.getBoolean(5));
+					//a.setAfecUs(new UsuarioVo());
+					//a.getAfecUs().setCorreo(rs.getString(8));
+					//a.getAfecUs().setEstado(rs.getBoolean(9));
 					// asi no se hace u.setDescripcionRol(rs.getString(10));
 					//otra forma de hacerlo
 					//r.setIdRol(rs.getInt("idRol"));
@@ -66,13 +64,12 @@ public class afectadaDao {
 			finally {
 				con.close();
 			}
-			return afectada;	
-		
+			return afectada;
 	}
 		
 		public List listarReport() throws SQLException {
 			List <afectadaVo> afectada = new ArrayList<>();
-			sql = "SELECT nombre, apellido, telefono,numeroDocumento FROM afectada ;";
+			sql = "SELECT nombre, apellido,numeroDocumento FROM afectada ;";
 			try {
 				con= Conexion.conectar();//abriendo la conexion a la bd
 				ps= con.prepareStatement(sql);//preparar sentencia
@@ -81,8 +78,8 @@ public class afectadaDao {
 					afectadaVo a = new afectadaVo();
 					a.setNombre(rs.getString(1));
 					a.setApellido(rs.getString(2));
-					a.setTelefono(rs.getString(3));
-					a.setNumeroDocumento(rs.getString(4));
+					//a.setTelefono(rs.getString(3));
+					a.setNumeroDocumento(rs.getString(3));
 				
 					afectada.add(a);
 					System.out.println("conexion exitosa");
@@ -102,10 +99,39 @@ public class afectadaDao {
 			return afectada;	
 		
 	}
-		
-		
 
-public int eliminar(int id) throws SQLException {
+	public afectadaVo validarUsuario(String correo,String passw) throws SQLException {
+		afectadaVo u=new afectadaVo();
+		sql="SELECT IDafectada,nombre,apellido,correo,contrasena,numeroDocumento,estado,cargo FROM afectada WHERE correo=? and contrasena=?;";
+		try {
+			con= Conexion.conectar();
+			ps=con.prepareStatement(sql);
+			ps.setString(1, correo);
+			ps.setString(2, passw);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				u.setIDafectada(rs.getInt(1));
+				u.setNombre(rs.getString(2));
+				u.setApellido(rs.getString(3));
+				u.setCorreo(rs.getString(4));
+				//u.setContrasena(getMD5(rs.getString(3)));
+				//u.setContrasena(rs.getString(3));
+				u.setContrasena(rs.getString(5));
+				u.setNumeroDocumento(rs.getString(6));
+				u.setEstado(rs.getBoolean(7));
+				u.setCargo(rs.getString(8));
+			}
+			ps.close();
+			System.out.println("Se encontró el Usuario");
+		}catch(Exception e) {
+			System.out.println("Se encontró el Usuario"+e.getMessage());
+		}finally {
+			con.close();
+		}
+		return u;
+	}
+
+	public int eliminar(int id) throws SQLException {
 	sql="DELETE FROM afectada WHERE IDafectada="+id;
 	
 	try {
@@ -127,15 +153,13 @@ public int eliminar(int id) throws SQLException {
 }
 		
 
-
-/*
 public int changeEstado(afectadaVo a) throws SQLException {
 	sql="UPDATE afectada SET estado=? FROM afectada WHERE IDafectada"+avo.getIDafectada();
 	
 	try {
 		con=c.conectar(); //Abriendo la conexi�n a la BD
 		ps=con.prepareStatement(sql); //preparar sentencia
-		ps.setBoolean(1, a.getAfecUs().isEstado());
+		ps.setBoolean(1, a.isEstado());
 		
 		System.out.println(ps);
 		ps.executeUpdate();//Ejeuci�n de la sentencia	
@@ -150,7 +174,7 @@ public int changeEstado(afectadaVo a) throws SQLException {
 	}
 	return row;//Retorna cantidad de filas afectadas
 }
-*/
+
 	/*public afectadaVo verMicaso(int id) throws SQLException{
 		afectadaVo r= new afectadaVo();
 		sql = "SELECT * FROM afectada where IDafectada="+id;
@@ -169,10 +193,12 @@ public afectadaVo consultaId(int id) throws SQLException {
 			r.setIDafectada(rs.getInt("IDafectada"));
 			r.setNombre(rs.getString("nombre"));
 			r.setApellido(rs.getString("apellido"));
-			r.setTelefono(rs.getString("telefono"));
-			r.setTipoDocumento(rs.getString("tipoDocumento"));
+			r.setCorreo(rs.getString("correo"));
+			r.setContrasena(rs.getString("contrasena"));
 			r.setNumeroDocumento(rs.getString("numeroDocumento"));
 			r.setFechaNacimiento(rs.getString("fechaNacimiento"));
+			r.setEstado(rs.getBoolean("estado"));
+			r.setCargo(rs.getString("cargo"));
 			
 			System.out.println("consulta exitosa");
 		
@@ -188,23 +214,23 @@ public afectadaVo consultaId(int id) throws SQLException {
 }
 public int edit(afectadaVo r) throws SQLException {
 
-sql="UPDATE afectada SET nombre=?,apellido=?,telefono=?,tipoDocumento=?,numeroDocumento=?,fechaNacimiento=? WHERE IDafectada="+r.getIDafectada();
+sql="UPDATE afectada SET nombre=?,apellido=?,correo=?,contrasena=?,numeroDocumento=?,fechaNacimiento=?,estado=?,cargo=? WHERE IDafectada="+r.getIDafectada();
 	
 	try {
 		con= Conexion.conectar(); //Abriendo la conexi�n a la BD
 		ps=con.prepareStatement(sql); //preparar sentencia
 		ps.setString(1, r.getNombre());
 		ps.setString(2, r.getApellido());
-		ps.setString(3, r.getTelefono());
-		ps.setString(4,r.getTipoDocumento());
+		ps.setString(3, r.getCorreo());
+		ps.setString(4,r.getContrasena());
 		ps.setString(5, r.getNumeroDocumento());
-		//falta correo y contrase�a ps.setInt(7, p.getProUs().getIDusuario());
 		ps.setString(6, r.getFechaNacimiento());
+		ps.setBoolean(7,r.isEstado());
+		ps.setString(8,r.getCargo());
+		//falta correo y contrase�a ps.setInt(7, p.getProUs().getIDusuario());
 		//get usuario o get correo y contrase�a
-		ps.setString(7, r.getAfecUs().getCorreo());
-		ps.setString(8, r.getAfecUs().getContrasena());
-
-		
+		//ps.setString(7, r.getAfecUs().getCorreo());
+		//ps.setString(8, r.getAfecUs().getContrasena());
 		System.out.println(ps);
 		ps.executeUpdate();//Ejeuci�n de la sentencia	
 		ps.close();
@@ -220,20 +246,22 @@ sql="UPDATE afectada SET nombre=?,apellido=?,telefono=?,tipoDocumento=?,numeroDo
 }
 
 public int registrar(afectadaVo r) throws SQLException {
-	sql="INSERT INTO afectada (nombre,apellido,telefono,tipoDocumento,numeroDocumento,fechaNacimiento) VALUES(?,?,?,?,?,?)";
+	sql="INSERT INTO afectada(nombre,apellido,correo,contrasena,numeroDocumento,fechaNacimiento,estado,cargo) VALUES(?,?,?,?,?,?,?,?);";
+	//sql="INSERT INTO afectada (nombre,apellido,telefono,tipoDocumento,numeroDocumento,fechaNacimiento) VALUES(?,?,?,?,?,?)";
 	//sql="INSERT INTO afectada (nombre,apellido,telefono,tipoDocumento,numeroDocumento,fechaNacimiento,IDusuario) VALUES(?,?,?,?,?,?,?,?)";
 	try {
 		con= Conexion.conectar();//abriendo la conexion a la bd
 		ps= con.prepareStatement(sql);//preparar sentencia
 		ps.setString(1, r.getNombre());
 		ps.setString(2, r.getApellido());
-		ps.setString(3, r.getTelefono());
-		ps.setString(4, r.getTipoDocumento());
+		ps.setString(3, r.getCorreo());
+		ps.setString(4, r.getContrasena());
 		ps.setString(5, r.getNumeroDocumento());
 		ps.setString(6, r.getFechaNacimiento());
+		ps.setBoolean(7,r.isEstado());
+		ps.setString(8,r.getCargo());
 		//ps.setInt(7, r.getAfecUs().getIDusuario());
 
-	
 		System.out.println(ps);
 		ps.executeUpdate();//ejecucion de la sentencia sentencias dif a consulta
 		ps.close();
@@ -248,5 +276,51 @@ public int registrar(afectadaVo r) throws SQLException {
 	return row;//retorna cantidad de filas afectadas
 }
 
+	static String generaContrasena() {
+
+		char[] mayusculas = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+		char[] minusculas = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+		char[] numeros = {'1','2','3','4','5','6','7','8','9','0'};
+
+		StringBuilder caracteres = new StringBuilder();
+		caracteres.append(mayusculas);
+		caracteres.append(minusculas);
+		caracteres.append(numeros);
+
+		StringBuilder contrasena = new StringBuilder();
+
+		for(int i = 0; i <= 8; i++) {
+			int cantidadCaracteres = caracteres.length();
+			int numeroRandom =(int)(Math.random()*cantidadCaracteres);
+
+			contrasena.append(caracteres).charAt(numeroRandom);
+		}
+
+		return contrasena.toString();
+	}
+
+	public int validarCorreo(String correo) throws SQLException {
+		afectadaVo u=new afectadaVo();
+		int total=0;
+		sql="SELECT COUNT(*) AS cantidad from afectada WHERE correo=?";
+		try {
+			con= Conexion.conectar();
+			ps=con.prepareStatement(sql);
+			ps.setString(1, correo);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				total=rs.getInt("cantidad");
+
+			}
+			ps.close();
+			System.out.println("Se encontró el total de registros  coinciden"+total);
+		}catch(Exception e) {
+			System.out.println("Se encontró el usuario "+e.getMessage());
+		}finally {
+			con.close();
+		}
+
+		return total;
+	}
 
 }
