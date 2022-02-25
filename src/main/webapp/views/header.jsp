@@ -70,26 +70,32 @@ if(session.getAttribute("us")!=null){
          <div>
         <strong>Bienvenido, ${us.correo}</strong>
         <!-- AQUI COMO MANEJO LO DE LOS NOMBRES YA QUE SON AFECTADA Y PROFESIONALO -->
-        
         </div>
   
       </a>
+    <br>
+    <a href="AfectadaController?accion=verPerfil" class="btn btn-outline-info">Ver Perfil Sesion AFECATDA</a>
       <br>
+    <a href="ProfesionalController?accion=verPerfil" class="btn btn-outline-info">Ver Perfil Sesion Prof</a>
+    <br>
    <a <c:if test="${us.cargo!='Cliente'}">hidden</c:if> href="MisCasosController?accion=abrirFormRegis" class="btn btn-info">Registrar mi caso</a>
    <br>
    
-   <a <c:if test="${us.cargo!='Cliente'}">hidden</c:if> href="AfectadaController?accion=abrirFormRegis" class="btn btn-warning">Registrar mi informacion</a>
+   <a <c:if test="${us.cargo!='Cliente'}">hidden</c:if> href="AfectadaController?accion=ver&id=${u.getIDprofesional()}" class="btn btn-warning">Editar mi informacion</a>
    <br>
-   <a <c:if test="${us.cargo=='Cliente'}">hidden</c:if> href="ProfesionalController?accion=abrirFormRegis" class="btn btn-info">Registrar mi informacion</a>
+   <a <c:if test="${us.cargo=='Cliente'}">hidden</c:if> href="ProfesionalController?accion=ver&id=${u.getIDprofesional()}" class="btn btn-info">Editar mi informacion</a>
    <br>
- 	<a href="RolController?accion=verPerfil" class="btn btn-outline-info">Ver Perfil Sesion</a>
+ 	<a href="AfectadaController?accion=openPass" class="btn btn-outline-info">cambiar contraseña AFECATDA</a>
  	<br>
- 	<a href="RolController?accion=openPass" class="btn btn-outline-info">Cambiar Contraseña</a>
+    <br>
+    <a href="ProfesionalController?accion=openPass" class="btn btn-outline-info">cambiar contraseña Profesional</a>
+    <br>
+ 	<!--<a href="RolController?accion=openPass" class="btn btn-outline-info">Cambiar Contraseña</a>-->
  	<br>
   <a href="AfectadaController?accion=logout" class="btn btn-outline-danger">Cerrar Sesion</a>
     <hr>
        <br>
- 	<a href="TipoAbusoController?accion=abrirTAb" <c:if test="${us.cargo=='Cliente'}">hidden</c:if> class="btn btn-outline-info">Tipo Abuso</a>
+ 	<!--<a href="TipoAbusoController?accion=abrirTAb" <cIif test="PESOS{us.cargo=='Cliente'}">hidden</cIif> class="btn btn-outline-info">Tipo Abuso</a>-->
  	<br>
     <ul class="nav nav-pills flex-column mb-auto">
       <!--<li class="nav-item" <cif test="{us.cargo=='Cliente'}">hidden</cif>>-->
@@ -99,14 +105,25 @@ if(session.getAttribute("us")!=null){
         </a>
         <br>
       </li>
-       <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item" <c:if test="${us.cargo!='Administrador'}">hidden</c:if>>
-        <a href="RolController?accion=listarRoles" class="nav-link active" aria-current="page">
-         <i class="bi bi-people-fill"></i>
-          Usuarios
-        </a>
-      </li>
+        <br>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <!--<li class="nav-item" <cif test="{us.cargo=='Cliente'}">hidden</cif>>-->
+            <a href="ProfesionalController?accion=listar" class="nav-link active" aria-current="page">
+                <i class="bi bi-people-fill"></i>
+             Profesionales
+            </a>
+            <br>
+            </li>
       <br>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <!--<li class="nav-item" <cif test="{us.cargo=='Cliente'}">hidden</cif>>-->
+                <a href="CasoController?accion=listar" class="nav-link active" aria-current="page">
+                    <i class="bi bi-people-fill"></i>
+                    Casos
+                </a>
+                <br>
+                </li>
+                <br>
       </li>
        <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item" <c:if test="${us.cargo!='Administrador'}">hidden</c:if>>
@@ -114,6 +131,13 @@ if(session.getAttribute("us")!=null){
          <i class="bi bi-people-fill"></i>
           Profesionales
         </a>
+          <ul class="nav nav-pills flex-column mb-auto">
+              <li class="nav-item" <c:if test="${us.cargo!='Administrador'}">hidden</c:if>>
+                  <a href="RolController?accion=listarRoles" class="nav-link active" aria-current="page">
+                      <i class="bi bi-people-fill"></i>
+                      Usuarios
+                  </a>
+              </li>
       </li>
       <li <c:if test="${us.cargo=='Cliente'}">hidden</c:if>>
         <a href="CasoController?accion=listar" class="nav-link text-white" >

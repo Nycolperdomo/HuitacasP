@@ -41,6 +41,7 @@
 				<option selected>Rol Profesional</option>
 				<option value="Abogada">Abogada</option>
 				<option value="Psicologa">Psicologa</option>
+				<option value="Administrador">Administrador</option>
 			</select>
 		</div>
 

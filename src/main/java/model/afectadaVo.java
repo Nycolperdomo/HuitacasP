@@ -114,6 +114,10 @@ public class afectadaVo {
 	}
 
 
+	public String getEstadoRepA() {
+		return this.estado ? "Activo" : "Inactivo";
+	}
+
 	
 	/*public String getAfecUsRep() {
 		return this.afecUs ? "Activo" : "Inactivo" this.afecUs.isEstado() : "--";

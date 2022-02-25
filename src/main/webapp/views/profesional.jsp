@@ -34,6 +34,7 @@
 				</td>
 			</c:if>
 			<td>${p.getCargo()}</td>
+			<td>
 			<a class="btn btn-warning" href="ProfesionalController?accion=ver&id=${p.getIDprofesional()}" role="button">Editar</a>
 			<!--invocar una funcion con onclick(borrar es el nombre de la funcion)-->
 			<a class="btn btn-danger" onclick="borrar(event,${p.getIDprofesional()},'Profesional')" role="button">Borrar</a>

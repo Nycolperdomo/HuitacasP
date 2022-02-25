@@ -9,9 +9,9 @@
 	
 	<tr>
 		<th>Id</th>
+
 		<!--<th>Descripcion</th>
 		<th>Acciones</th>-->
-		<th>Documento Caso</th>
 	</tr>
 	<!-- el member esta request.setAttribute("member", inte);para recibir datos (controller) -->
 	<c:forEach items="${caso}" var="p">	

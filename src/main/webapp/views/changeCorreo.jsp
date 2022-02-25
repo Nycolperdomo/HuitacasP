@@ -7,7 +7,7 @@
   	
   	<div class="form-group">
   		<label for="id">Id Documento</label>
-  		<input type="hidden" class="form-control" name="id" id="id" value="${us.IDusuario}"/>
+  		<input type="hidden" class="form-control" name="id" id="id" value="${us.IDafectada}"/>
   		<input type="hidden" class="form-control" name="passu" id="passu" value="${us.correo}"/>
   		
   	</div>
@@ -19,13 +19,13 @@
   	
   		<div class="form-group">
   		<label for="passnew">Correo Nuevo</label><br>
-  		<input type="email" class="form-control" onchange="verificarPass()" name="passnew" id="passnew" placeholder="Ingrese la contraseña nueva"/>
+  		<input type="email" class="form-control" onchange="verificarPass()" name="passnew" id="passnew" placeholder="Ingrese la contraseï¿½a nueva"/>
   	</div>
   	
   	
   		<div class="form-group">
   		<label for="passnew2">Confirma Correo Nuevo</label><br>
-  		<input type="email" class="form-control" name="passnew2" id="passnew2" placeholder="Confirme la contraseña nueva"/>
+  		<input type="email" class="form-control" name="passnew2" id="passnew2" placeholder="Confirme la contraseï¿½a nueva"/>
   	</div>
   	
 		<div class="form-group">
@@ -60,9 +60,9 @@ function vericarPass(){
 	const passnew2=document.getElementById("passnew2");
 	
 	if(passnew.value==passnew2.value){
-		alert("Las contraseñas coinciden");
+		alert("Las contraseï¿½as coinciden");
 	}else{
-		alert("Las contraseñas no coinciden");
+		alert("Las contraseï¿½as no coinciden");
 		passant.focus();
 		passant.value="";
 	}

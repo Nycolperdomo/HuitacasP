@@ -48,7 +48,7 @@
 		</div>
 		<div class="form-group">
 			<label for="fechaNa">Fecha De Nacimiento:</label>
-			<input class="form-control" type="date" name="fechaNa" placeholder="Ingrese su Fecha De Nacimiento " required>
+			<input class="form-control" type="date" id="fechaNa" name="fechaNa" placeholder="Ingrese su Fecha De Nacimiento " required>
 		</div>
 		<div class="form-check">
 			<input class="form-check-input" type="checkbox" name="chkEstado" id="chkEstado" checked>
@@ -60,7 +60,7 @@
 			<label for="cargo">Cargo Usuario</label>
 			<select name="cargo" class="form-select">
 				<option>Seleccione el cargo del Usuario</option>
-				<option value="afectada">Cliente</option>
+				<option value="Cliente">Cliente</option>
 
 			</select>
 

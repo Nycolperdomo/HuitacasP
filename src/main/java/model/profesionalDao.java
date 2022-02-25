@@ -14,7 +14,7 @@ import util.Conexion;
 
 public class profesionalDao {
 
-	
+
 	//definir esas variables para realizar operaciones sobre la BD
 	Connection con;
 	//guarda el resultado de la consulta
@@ -23,22 +23,23 @@ public class profesionalDao {
 	PreparedStatement ps;
 	String sql;
 	int row;
-	
-	Conexion c= new Conexion();
-	
+
+	Conexion c = new Conexion();
+	Contrasena contra = new Contrasena();
+
 	//metodos
 
 	public List listar() throws SQLException {
-		List <profesionalVo> profesional = new ArrayList<>();
+		List<profesionalVo> profesional = new ArrayList<>();
 		//sql="SELECT * FROM usuario INNER JOIN profesional on usuario.IDusuario = profesional.IDusuario;";
-		sql="select IDprofesional,nombre,apellido,correo,estado,cargo FROM profesional;";
-		
+		sql = "select IDprofesional,nombre,apellido,correo,estado,cargo FROM profesional;";
+
 		try {
-			con= Conexion.conectar();//abriendo la conexion a la bd
-			ps= con.prepareStatement(sql);//preparar sentencia
+			con = Conexion.conectar();//abriendo la conexion a la bd
+			ps = con.prepareStatement(sql);//preparar sentencia
 			rs = ps.executeQuery();//ejecucion de la sentencia y guardar el resultado en el resulSet
 
-			while(rs.next()) {
+			while (rs.next()) {
 				profesionalVo p = new profesionalVo();
 				p.setIDprofesional(rs.getInt(1));
 				p.setNombre(rs.getString(2));
@@ -54,30 +55,30 @@ public class profesionalDao {
 				// asi no se hace u.setDescripcionRol(rs.getString(10));
 				//otra forma de hacerlo
 				//r.setIdRol(rs.getInt("idRol"));
-			
+
 				profesional.add(p);
 				System.out.println("conexion exitosa");
 			}
 			ps.close();
 		} catch (Exception e) {
-			System.out.println("conexion no exitosa"+e.getMessage());
-		}
-		finally {
+			System.out.println("conexion no exitosa" + e.getMessage());
+		} finally {
 			con.close();
 		}
-		return profesional;	
-	
-}
-	public profesionalVo validarUsuario(String correo,String passw) throws SQLException {
-		profesionalVo u=new profesionalVo();
-		sql="SELECT IDprofesional,nombre,apellido,correo,contrasena,numeroDocumento,estado,cargo FROM profesional WHERE correo=? and contrasena=?;";
+		return profesional;
+
+	}
+
+	public profesionalVo validarUsuario(String correo, String passw) throws SQLException {
+		profesionalVo u = new profesionalVo();
+		sql = "SELECT IDprofesional,nombre,apellido,correo,contrasena,numeroDocumento,estado,cargo FROM profesional WHERE correo=? and contrasena=?;";
 		try {
-			con= Conexion.conectar();
-			ps=con.prepareStatement(sql);
+			con = Conexion.conectar();
+			ps = con.prepareStatement(sql);
 			ps.setString(1, correo);
 			ps.setString(2, passw);
-			rs=ps.executeQuery();
-			while(rs.next()) {
+			rs = ps.executeQuery();
+			while (rs.next()) {
 				u.setIDprofesional(rs.getInt(1));
 				u.setNombre(rs.getString(2));
 				u.setApellido(rs.getString(3));
@@ -91,37 +92,38 @@ public class profesionalDao {
 			}
 			ps.close();
 			System.out.println("Se encontró el Usuario");
-		}catch(Exception e) {
-			System.out.println("Se encontró el Usuario"+e.getMessage());
-		}finally {
+		} catch (Exception e) {
+			System.out.println("Se encontró el Usuario" + e.getMessage());
+		} finally {
 			con.close();
 		}
 		return u;
 	}
 
-public int eliminar(int id) throws SQLException {
-	sql="DELETE FROM profesional WHERE IDprofesional="+id;
-	
-	try {
-		con= Conexion.conectar(); //Abriendo la conexi�n a la BD
-		ps=con.prepareStatement(sql); //preparar sentencia
-		
-		System.out.println(ps);
-		ps.executeUpdate();//Ejeuci�n de la sentencia	
-		ps.close();
-		System.out.println("Se elimin� un profesional");
-		
-	}catch(Exception e) {
-		System.out.println("Error al eliminar profesional" +e.getMessage());
+	public int eliminar(int id) throws SQLException {
+		sql = "DELETE FROM profesional WHERE IDprofesional=" + id;
+
+		try {
+			con = Conexion.conectar(); //Abriendo la conexi�n a la BD
+			ps = con.prepareStatement(sql); //preparar sentencia
+
+			System.out.println(ps);
+			ps.executeUpdate();//Ejeuci�n de la sentencia
+			ps.close();
+			System.out.println("Se elimin� un profesional");
+
+		} catch (Exception e) {
+			System.out.println("Error al eliminar profesional" + e.getMessage());
+		} finally {
+			con.close();
+		}
+		return row;//Retorna cantidad de filas afectadas
 	}
-	finally {
-		con.close();
-	}
-	return row;//Retorna cantidad de filas afectadas
-}
-	public int ValidarUsuario(String correo, String passw) throws SQLException {
+
+
+	public profesionalVo ValidarUsuario(String correo, String passw) throws SQLException {
 		profesionalVo u= new profesionalVo();
-		sql="SELECT IDprofesional,nombre,apellido,correo,contrasena,numeroDocumento,estado,cargo FROM profesional WHERE correo = ?;;";
+		sql="SELECT IDprofesional,nombre,apellido,correo,contrasena,numeroDocumento,estado,cargo FROM profesional WHERE correo = ? and contrasena=?;";
 		try {
 			con= Conexion.conectar(); //Abriendo la conexi�n a la BD
 			ps=con.prepareStatement(sql); //preparar sentencia
@@ -150,7 +152,7 @@ public int eliminar(int id) throws SQLException {
 		finally {
 			con.close();
 		}
-		return row;//Retorna cantidad de filas afectadas
+		return u;//Retorna cantidad de filas afectadas
 	}
 
 public int registrar(profesionalVo p) throws SQLException {
@@ -162,7 +164,7 @@ public int registrar(profesionalVo p) throws SQLException {
 		ps.setString(1, p.getNombre());
 		ps.setString(2, p.getApellido());
 		ps.setString(3, p.getCorreo());
-		ps.setString(4, p.getContrasena());
+		ps.setString(4, contra.getPassword());
 		ps.setString(5, p.getNumeroDocumento());
 		ps.setBoolean(6, p.isEstado());
 		ps.setString(7,p.getCargo());
@@ -274,6 +276,42 @@ public int edit(profesionalVo r) throws SQLException {
 	return row;//Retorna cantidad de filas afectadas
 }
 
+	public int changeCorreo(profesionalVo us) throws SQLException {
+		sql="UPDATE profesional SET correo=? WHERE IDprofesional="+us.getIDprofesional();
+
+		try {
+			con= Conexion.conectar();
+			ps=con.prepareStatement(sql);
+			ps.setString(1, us.getCorreo());
+			System.out.println(ps);
+			ps.executeUpdate();
+			ps.close();
+		}catch (Exception e) {
+			System.out.println("Error al cambiar el correo"+e.getMessage());
+		}
+		finally {
+			con.close();
+		}
+		return row;
+	}
+	public int changePassword(profesionalVo us) throws SQLException {
+		sql="UPDATE profesional SET contrasena=? WHERE IDprofesional="+us.getIDprofesional();
+
+		try {
+			con=c.conectar();
+			ps=con.prepareStatement(sql);
+			ps.setString(1, us.getContrasena());
+			System.out.println(ps);
+			ps.executeUpdate();
+			ps.close();
+		}catch (Exception e) {
+			System.out.println("Error al cambiar la contraseña"+e.getMessage());
+		}
+		finally {
+			con.close();
+		}
+		return row;
+	}
 	static String generaContrasena() {
 
 		char[] mayusculas = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};

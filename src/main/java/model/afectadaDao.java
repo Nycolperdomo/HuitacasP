@@ -69,7 +69,7 @@ public class afectadaDao {
 		
 		public List listarReport() throws SQLException {
 			List <afectadaVo> afectada = new ArrayList<>();
-			sql = "SELECT nombre, apellido,numeroDocumento FROM afectada ;";
+			sql = "SELECT nombre,apellido,numeroDocumento,estado FROM afectada;";
 			try {
 				con= Conexion.conectar();//abriendo la conexion a la bd
 				ps= con.prepareStatement(sql);//preparar sentencia
@@ -80,6 +80,7 @@ public class afectadaDao {
 					a.setApellido(rs.getString(2));
 					//a.setTelefono(rs.getString(3));
 					a.setNumeroDocumento(rs.getString(3));
+					a.setEstado(rs.getBoolean(4));
 				
 					afectada.add(a);
 					System.out.println("conexion exitosa");
@@ -321,6 +322,44 @@ public int registrar(afectadaVo r) throws SQLException {
 		}
 
 		return total;
+	}
+	public int changePassword(afectadaVo us) throws SQLException {
+		sql="UPDATE afectada SET contrasena=? WHERE IDafectada="+us.getIDafectada();
+
+		try {
+			con=c.conectar();
+			ps=con.prepareStatement(sql);
+			ps.setString(1, us.getContrasena());
+			System.out.println(ps);
+			ps.executeUpdate();
+			ps.close();
+		}catch (Exception e) {
+			System.out.println("Error al cambiar la contraseña"+e.getMessage());
+		}
+		finally {
+			con.close();
+		}
+		return row;
+	}
+
+
+	public int changeCorreo(afectadaVo us) throws SQLException {
+		sql="UPDATE afectada SET correo=? WHERE IDafectada="+us.getIDafectada();
+
+		try {
+			con= Conexion.conectar();
+			ps=con.prepareStatement(sql);
+			ps.setString(1, us.getCorreo());
+			System.out.println(ps);
+			ps.executeUpdate();
+			ps.close();
+		}catch (Exception e) {
+			System.out.println("Error al cambiar el correo"+e.getMessage());
+		}
+		finally {
+			con.close();
+		}
+		return row;
 	}
 
 }

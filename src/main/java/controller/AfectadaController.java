@@ -110,6 +110,7 @@ public class AfectadaController extends HttpServlet {
 					//	abrirForm(request, response);
 					//	break; ESTE ES EL ABRIR FORMULARIO DE AGREGAR UN USUARIO
 					case "add":
+						System.out.println("Entro al caso ADD" );
 						add(request, response);
 						break;
 					case "abrirFormulario2":
@@ -127,20 +128,20 @@ public class AfectadaController extends HttpServlet {
 						break;
 					case "changeEstado":
 						changeEstado(request, response);
+						break;case "verPerfil":
+						verPerfil(request,response);
 						break;
-					/*case "openPass":
+					case "openPass":
 						openPass(request,response);
 						break;
 					case "changePass":
 						changePass(request,response);
 						break;
-					case "verPerfil":
-						verPerfil(request,response);
-						break;
+
 					case "changeCorreo":
 						changeCorreo(request,response);
 						break;
-					case "abrirFormRegis":
+					/*case "abrirFormRegis":
 						abrirFormRegis(request,response);
 						break;*/
 					case "validarCorreo":
@@ -191,7 +192,7 @@ public class AfectadaController extends HttpServlet {
 					.getResourceAsStream("reportes/img/logo.jpg");
 			java.io.InputStream reporteAfectadas = this.getServletConfig()
 					.getServletContext()
-					.getResourceAsStream("reportes/rCasos.jasper");
+					.getResourceAsStream("reportes/AfectadaReport.jasper");
 			//Validar que no vengan vacios
 			if (logo != null && reporteAfectadas != null) {
 				//Crear lista de la clase Vo para guardar resultado de la consulta
@@ -262,7 +263,7 @@ public class AfectadaController extends HttpServlet {
 	}
 
 	private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		System.out.println("Entramos al método borrar");
 		if (request.getParameter("id") != null) {
 			aVo.setIDafectada(Integer.parseInt(request.getParameter("id")));
 		}
@@ -319,7 +320,7 @@ private void changeEstado(HttpServletRequest request, HttpServletResponse respon
 	}
 
 	private void ver(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		System.out.println("Entramos al metodo ver");
 		aVo.setIDafectada(Integer.parseInt(request.getParameter("id")));
 		try {
 			//(para que del modelo suba al controlador)
@@ -338,6 +339,7 @@ private void changeEstado(HttpServletRequest request, HttpServletResponse respon
 	}
 
 	private void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Entramos al método editar");
 		aVo.setIDafectada(Integer.parseInt(request.getParameter("id")));
 		aVo.setNombre(request.getParameter("nombre"));
 		aVo.setApellido(request.getParameter("apellido"));
@@ -379,7 +381,7 @@ private void changeEstado(HttpServletRequest request, HttpServletResponse respon
 	}
 
 	private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		System.out.println("Entramos al método agrgarADD");
 			if (request.getParameter("nombre") != null) {
 				aVo.setNombre(request.getParameter("nombre"));
 			}
@@ -406,9 +408,9 @@ private void changeEstado(HttpServletRequest request, HttpServletResponse respon
 			String asunto = "Bienvenido A Huitacas";
 			String cuerpo = "<h1> Gracias por registrarse en Huitacas </h1>"
 					//+ r.getCorreo() +", " +r.getContrasena()
-					+ " <img src ='https://www.clinicaveterinariaanimalandia.com/images/clinica-veterinaria-animalandia-logo.png'/>"
+					+ " <img src ='https://harmonia.la/imagen_nota/feminismo.jpg?mrf-size=m'/>"
 					+ " <h4> Para iniciar sesiòn </h4>"
-					+ " <a href='http://localhost:8080/prac_war/RolController?accion=abrirLogin'>Haga click aquì</a>";
+					+ " <a href='http://localhost:8080/prac_war/AfectadaController?accion=abrirLogin'>Haga click aquì</a>";
 			try {
 				Configmail.enviarCorreo(host, puerto, remitente, password, destinatario, asunto, cuerpo);
 				System.out.println("el mensaje fue enviado correctamwnte");
@@ -475,7 +477,59 @@ private void changeEstado(HttpServletRequest request, HttpServletResponse respon
 		}
 
 	}
+//ver correo antes de cambiar
+	private void verPerfil(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		try {
+			request.getRequestDispatcher("views/changeCorreoA.jsp").forward(request, response);
+			System.out.println("formulario cambio correo abierto");
+		}catch(Exception e) {
+
+			System.out.println("Error al abrir el formulario cambio contrase�a"+e.getMessage());
+		}
+
+	}
+
+	private void changeCorreo (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		if(request.getParameter("id")!=null && request.getParameter("passnew")!=null) {
+			aVo.setIDafectada(Integer.parseInt(request.getParameter("id")));
+			aVo.setCorreo(request.getParameter("passnew"));
+		}
+		try {
+			aDao.changeCorreo(aVo);
+			request.getRequestDispatcher("AfectadaController?accion=logout").forward(request, response);
+		}catch(Exception e) {
+			System.out.println("error al cambiar password"+e.getMessage());
+		}
+
+	}
+	private void openPass(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		try {
+			request.getRequestDispatcher("views/changePassA.jsp").forward(request, response);
+			System.out.println("Cambio Password abierto");
+		}catch(Exception e) {
+
+			System.out.println("Error al abrir el formulario de cambio de password");
+		}
+	}
+
+
+	private void changePass (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		if(request.getParameter("id")!=null && request.getParameter("passnew")!=null) {
+			aVo.setIDafectada(Integer.parseInt(request.getParameter("id")));
+			aVo.setContrasena(request.getParameter("passnew"));
+		}
+		try {
+			aDao.changePassword(aVo);
+			request.getRequestDispatcher("AfectadaController?accion=logout").forward(request, response);
+		}catch(Exception e) {
+			System.out.println("error al cambiar password"+e.getMessage());
+		}
+
+	}
 	/*este formulario es el que abre el administrador y es donde agrega al profesional,pero segun yo este form ya debe ir en el otro servlet
 	private void abrirForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {

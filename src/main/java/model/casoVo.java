@@ -6,32 +6,30 @@ public class casoVo {
 
 	private int IDcaso;
 	private Boolean estado ;
-	private String fechaInicio, fechaFin;
+	private String fechaInicio, fechaFin,tipoAbuso,tipoAsesoria,urlDocumento;
+	private afectadaVo afeCas;
+	private  profesionalVo profCaso;
 
-	private tipoAbusoVo abuCas;
+	/*
+
 	private tipoAsesoriaVo aseCas;
 	private  profesionalVo profCaso;
-	
-	
-	
+	*/
 	public casoVo () {
 		
 	}
 
-
-	public casoVo(int iDcaso, Boolean estado, String fechaInicio, String fechaFin, tipoAbusoVo abuCas,
-			tipoAsesoriaVo aseCas, profesionalVo profCaso) {
-		super();
-		IDcaso = iDcaso;
+	public casoVo(int IDcaso, Boolean estado, String fechaInicio, String fechaFin, String tipoAbuso, String tipoAsesoria, String urlDocumento, afectadaVo afeCas, profesionalVo profCaso) {
+		this.IDcaso = IDcaso;
 		this.estado = estado;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.abuCas = abuCas;
-		this.aseCas = aseCas;
+		this.tipoAbuso = tipoAbuso;
+		this.tipoAsesoria = tipoAsesoria;
+		this.urlDocumento = urlDocumento;
+		this.afeCas = afeCas;
 		this.profCaso = profCaso;
-		
 	}
-
 
 	public int getIDcaso() {
 		return IDcaso;
@@ -74,34 +72,41 @@ public class casoVo {
 	}
 
 
-	public tipoAbusoVo getAbuCas() {
-		return abuCas;
+	public Boolean getEstado() {
+		return estado;
 	}
 
-
-	public void setAbuCas(tipoAbusoVo abuCas) {
-		this.abuCas = abuCas;
+	public String getTipoAbuso() {
+		return tipoAbuso;
 	}
 
-
-	public tipoAsesoriaVo getAseCas() {
-		return aseCas;
+	public void setTipoAbuso(String tipoAbuso) {
+		this.tipoAbuso = tipoAbuso;
 	}
 
-
-	public void setAseCas(tipoAsesoriaVo aseCas) {
-		this.aseCas = aseCas;
+	public String getTipoAsesoria() {
+		return tipoAsesoria;
 	}
 
-
-	public String getAbuCasRep() {
-		return this.abuCas!=null ? this.abuCas.getNombre() : "--";
-	}
-	
-	public String getEstadoRep() {
-		return this.estado ? "Activo" : "Inactivo";
+	public void setTipoAsesoria(String tipoAsesoria) {
+		this.tipoAsesoria = tipoAsesoria;
 	}
 
+	public String getUrlDocumento() {
+		return urlDocumento;
+	}
+
+	public void setUrlDocumento(String urlDocumento) {
+		this.urlDocumento = urlDocumento;
+	}
+
+	public afectadaVo getAfeCas() {
+		return afeCas;
+	}
+
+	public void setAfeCas(afectadaVo afeCas) {
+		this.afeCas = afeCas;
+	}
 	public profesionalVo getProfCaso() {
 		return profCaso;
 	}
@@ -109,4 +114,14 @@ public class casoVo {
 	public void setProfCaso(profesionalVo profCaso) {
 		this.profCaso = profCaso;
 	}
+	public String getAfeCasRep() {
+		return this.afeCas!=null ? this.afeCas.getNombre() : "--";
+	}
+
+
+        public String getEstadoRep() {
+            return this.estado ? "Activo" : "Inactivo";
+        }
+
+
 }

@@ -51,6 +51,7 @@
                 <a href="AfectadaController?accion=abrirFormulario2" class="btn btn-success">Registrate ahora</a>
                 
 <a href="AfectadaController?accion=abrirLogin" class="btn  btn-success" role="button">login</a>
+                <a href="ProfesionalController?accion=abrirLogin" class="btn  btn-success" role="button">login2</a>
             </div>
         </div>
     </header>

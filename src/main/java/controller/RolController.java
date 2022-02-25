@@ -325,7 +325,7 @@ private void addatos(HttpServletRequest request, HttpServletResponse response) t
 		System.out.println("Error al abrir el formulario Rol");
 	}
 }
-
+VERDADEROOOOOOOOOOOOOOOOOOO
 
 private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	//dentro de la aplicacion el agregar

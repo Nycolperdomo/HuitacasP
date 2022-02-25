@@ -13,12 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.UsuarioDao;
-import model.UsuarioVo;
+import model.*;
 
-import model.casoDao;
-import model.casoVo;
-import model.tipoAsesoriaVo;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -61,7 +57,9 @@ public class CasoController extends HttpServlet {
 				case "listar":
 					listar(request, response);
 					break;
-					
+                   /* case  "listarCaso":
+                        listarCaso(request,response);
+                        break;*/
 				case "abrirFormRegis":
 					abrirFormRegis(request,response);
 					break;
@@ -98,23 +96,20 @@ public class CasoController extends HttpServlet {
 		}
 	} 
 
-	
 	private void reporteCasos(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException{
 		//Crear objeto de tipo ServletOutputStream
-
-	
 		ServletOutputStream out = response.getOutputStream();
         try {
-        	//Declarar variables de imágenes y de reporte con sus rutas en webapp
+        	//Declarar variables de imï¿½genes y de reporte con sus rutas en webapp
             java.io.InputStream logo = this.getServletConfig()
                     .getServletContext()
                     .getResourceAsStream("reportes/img/logo.jpg");
 			java.io.InputStream reporteCasos = this.getServletConfig()
                             .getServletContext()
-                            .getResourceAsStream("reportes/reportCasos.jasper");
+                            .getResourceAsStream("reportes/rCas.jasper");
 			//Validar que no vengan vacios
-            if (logo != null && reporteCasos != null) {
+			if (logo != null && reporteCasos != null) {
                 //Crear lista de la clase Vo para guardar resultado de la consulta
                 List<casoVo> reporteCaso1 = new ArrayList<>();
                 reporteCaso1= cDao.report() ;
@@ -124,13 +119,13 @@ public class CasoController extends HttpServlet {
                 //Declarar variable ds para asignar el reporteUsuario1
                 JRBeanArrayDataSource ds = new JRBeanArrayDataSource(reporteCaso1.toArray());
                 
-                //Mapeamos los parámetros del Jasper reports
+                //Mapeamos los parï¿½metros del Jasper reports
                 Map<String, Object> parameters = new HashMap();
                 parameters.put("ds", ds);
                 parameters.put("logo", logo);
                 //Formateamos la salida del reporte
                 response.setContentType("application/pdf");
-                //Para abrir el reporte en otra pestaña
+                //Para abrir el reporte en otra pestaï¿½a
                 response.addHeader("Content-disposition", "inline; filename=ReporteCasos.pdf");
                 //Imprimimos el reporte
                 JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, ds);
@@ -146,7 +141,7 @@ public class CasoController extends HttpServlet {
             }
         } catch (Exception e) {
             response.setContentType("text/plain");
-            out.print("ocurrió un error al intentar generar el reporte:" + e.getMessage());
+            out.print("ocurriï¿½ un error al intentar generar el reporte:" + e.getMessage());
             e.printStackTrace();
         }
 	}
@@ -171,18 +166,37 @@ public class CasoController extends HttpServlet {
 					System.out.println("caso encontrados");
 					
 				} catch (Exception e) {
-					System.out.println("casp no encontradods"+e.getMessage());
+					System.out.println("casoooo no encontrado"+e.getMessage());
 				}
 				finally {
 					//rdao=null;
 				}
 				
 			}
+    private void listarCaso(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	profesionalDao adao = new profesionalDao();
+	List<profesionalVo> profesional=null;
+        try {
+            //(para que del modelo suba al controlador)
+			profesional= adao.listar();
+            //(para que del controlador suba a una vista)
+            request.setAttribute("prof"	,profesional);
+            request.getRequestDispatcher("views/add-caso.jsp").forward(request, response);
+            System.out.println("caso encontrados");
 
+        } catch (Exception e) {
+            System.out.println("casoooo no encontrado"+e.getMessage());
+        }
+        finally {
+            //rdao=null;
+        }
+
+    }
 
 
 		private void abrirFormRegis(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			try {
+				this.listarCaso(request,response);
 				request.getRequestDispatcher("views/add-caso.jsp").forward(request, response);
 				System.out.println("Formulario caso Abierto");
 			} catch (Exception e) {
@@ -191,27 +205,35 @@ public class CasoController extends HttpServlet {
 			}
 				
 		}
-
-
 		private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
-			if(request.getParameter("FechaInicio") !=null) {
-				cVo.setFechaInicio(request.getParameter("FechaInicio"));
-			}
-			if(request.getParameter("FechaFin") !=null) {
-				cVo.setFechaFin(request.getParameter("FechaFin"));
-			}
+			if(request.getParameter("fechaInicio") !=null && request.getParameter("fechaFin")!=null) {
+				cVo.setTipoAbuso(request.getParameter("tipoAbuso"));
+				cVo.setTipoAsesoria(request.getParameter("tipoAsesoria"));
+				cVo.setFechaInicio(request.getParameter("fechaInicio"));
+				cVo.setFechaFin(request.getParameter("fechaFin"));
+				cVo.setUrlDocumento(request.getParameter("documneto"));
+				//cVo.setEstado(request.getParameter("chkEstado") != null);
+				if(request.getParameter("chkEstado") !=null){
+					cVo.setEstado(true);
+				}
+				else {
+					cVo.setEstado(false);
+				}
+				afectadaVo a = new afectadaVo();
+				a.setIDafectada(Integer.parseInt(request.getParameter("afecas")));
+				profesionalVo p = new profesionalVo();
+				p.setIDprofesional(Integer.parseInt(request.getParameter("procaso")));
 
-			cVo.setEstado(request.getParameter("chkEstado") != null);
+				cVo.setAfeCas(a);
+				cVo.setProfCaso(p);
 
+			}
 			/*tipoAsesoriaVo t = new tipoAsesoriaVo(); 
 			
 				t.setIDasesoria(Integer.parseInt(request.getParameter("asesoria")));
 				cVo.setAseCas(t);
 			*/
-			
-		
-
 			try {
 				cDao.registrar(cVo);
 				response.sendRedirect("CasoController?accion=listar");
@@ -222,15 +244,11 @@ public class CasoController extends HttpServlet {
 			}
 		}
 
-
-
 		private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
 			if(request.getParameter("id") !=null) {
 				cVo.setIDcaso(Integer.parseInt(request.getParameter("id")));
 			}
-			
-			
 			try {
 				cDao.eliminar(cVo.getIDcaso());
 				response.sendRedirect("CasoController?accion=listar");
@@ -243,15 +261,14 @@ public class CasoController extends HttpServlet {
 
 
 		private void changeEstado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			casoDao udao = new casoDao();
-			casoVo r = new casoVo();
-			r.setIDcaso(Integer.parseInt(request.getParameter("id")));
-			r.setEstado(Boolean.parseBoolean(request.getParameter("estad")));
+			//casoDao udao = new casoDao();
+			//casoVo r = new casoVo();
+			cVo.setIDcaso(Integer.parseInt(request.getParameter("id")));
+			cVo.setEstado(Boolean.parseBoolean(request.getParameter("estad")));
 		System.out.println("estad");
-
 		try {
 			//r dato que s guardo en el Vo (par de datos)
-			udao.changeEstado(r);
+			cDao.changeEstado(cVo);
 			response.sendRedirect("CasoController?accion=listar");
 			System.out.println("caso cambiado");
 		}catch(Exception e) {
@@ -278,16 +295,25 @@ public class CasoController extends HttpServlet {
 			finally {
 				//rdao=null;
 				}
-			
 			}
 		private void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
-			if(request.getParameter("id")!=null && request.getParameter("FechaInicio") !=null && request.getParameter("FechaFin")!=null) {
+			if(request.getParameter("id")!=null && request.getParameter("fechaInicio") !=null && request.getParameter("fechaFin")!=null) {
 				
 				cVo.setIDcaso(Integer.parseInt(request.getParameter("id")));
-				cVo.setFechaInicio(request.getParameter("FechaInicio"));
-				cVo.setFechaFin(request.getParameter("FechaFin"));
+				cVo.setTipoAbuso(request.getParameter("tipoAbuso"));
+				cVo.setTipoAsesoria(request.getParameter("tipoAsesoria"));
+				cVo.setFechaInicio(request.getParameter("fechaInicio"));
+				cVo.setFechaFin(request.getParameter("fechaFin"));
+				cVo.setUrlDocumento(request.getParameter("urlDocumento"));
 				cVo.setEstado(request.getParameter("chkEstado") != null);
+				afectadaVo a = new afectadaVo();
+				a.setIDafectada(Integer.parseInt(request.getParameter("afecas")));
+				profesionalVo p = new profesionalVo();
+				p.setIDprofesional(Integer.parseInt(request.getParameter("procaso")));
+
+				cVo.setAfeCas(a);
+				cVo.setProfCaso(p);
 				
 			}
 			
