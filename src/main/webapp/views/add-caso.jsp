@@ -63,17 +63,18 @@
 			</cIIforEach>
 		</select>
 	</div>-->
-	<select name="turno"><br>
+
+	<select name="procaso"><br>
 	<option> Seleccione al profesional con el que desea asesoria</option><br>
 	<c:forEach items="${prof}" var="r">
 		<option value="${r.getIDprofesional()}"> ${r.getNombre() } </option>
 	</c:forEach>
 	</select><br>
 
-
+<br>
 	<div class="form-group">
-		<label for="procaso">Nombre Afectada</label>
-		<input type="text" class="form-control" name="procaso" id="procaso">
+
+		<input type="hidden" class="form-control"  name="afecas" id="procaso" value="${us.getIDafectada()}">
 	</div>
 
 

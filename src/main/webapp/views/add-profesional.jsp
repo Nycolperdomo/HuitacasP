@@ -37,7 +37,7 @@
 		<div class="form-group">
 			<label for="cargo">Cargo</label>
 			<!-- SELECT INDISPENSABLE EL NAME -->
-			<select name="cargo" class="form-select">
+			<select id="cargo" name="cargo" class="form-select">
 				<option selected>Rol Profesional</option>
 				<option value="Abogada">Abogada</option>
 				<option value="Psicologa">Psicologa</option>
