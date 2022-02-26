@@ -73,6 +73,7 @@ public class AfectadaController extends HttpServlet {
 
 					case "abrirLogin":
 						abrirLogin(request, response);
+						System.out.print("Aqui esta el login");
 						break;
 					case "login":
 						aVo.setCorreo(request.getParameter("correo"));
