@@ -141,9 +141,9 @@ public class AfectadaController extends HttpServlet {
 					case "changeCorreo":
 						changeCorreo(request,response);
 						break;
-					/*case "abrirFormRegis":
+					case "abrirFormRegis":
 						abrirFormRegis(request,response);
-						break;*/
+						break;
 					case "validarCorreo":
 						validarCorreo(request,response);
 						break;
@@ -281,7 +281,6 @@ public class AfectadaController extends HttpServlet {
 
 /*
 private void changeEstado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
 		
 		aVo.setIDafectada(Integer.parseInt(request.getParameter("id")));
 		aVo.getAfecUs().setEstado(Boolean.parseBoolean(request.getParameter("estad")));
@@ -427,18 +426,18 @@ private void changeEstado(HttpServletRequest request, HttpServletResponse respon
 			}
 		}
 	}
-/*este formulario es el registar afectada desde el login
+//este formulario es el registar afectada desde el login
 	private void abrirFormRegis(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
 			//para enviar a una vista particular
-			request.getRequestDispatcher("views/add-afectada.jsp").forward(request, response);
+			request.getRequestDispatcher("views/jspaddAfectada.jsp").forward(request, response);
 			System.out.println("Formulario afectada Abierto");
 		} catch (Exception e) {
 			System.out.println("Error al abrir el formulario afectada" + e.getMessage());
 
 		}
-	}*/
+	}
 	//registro de a acfectada
 	//este formulario es el registar afectada desde el login
 	private void abrirFormulario2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
