@@ -70,7 +70,6 @@
 		<option value="${r.getIDprofesional()}"> ${r.getNombre() } </option>
 	</c:forEach>
 	</select><br>
-
 <br>
 	<div class="form-group">
 
