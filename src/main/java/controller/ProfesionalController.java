@@ -204,19 +204,16 @@ private void listar(HttpServletRequest request, HttpServletResponse response) th
 	}
 
 	private void changeEstado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		profesionalDao udao = new profesionalDao();
-		profesionalVo r = new profesionalVo();
-		r.setIDprofesional(Integer.parseInt(request.getParameter("id")));
-		r.setEstado(Boolean.parseBoolean(request.getParameter("estad")));
-		System.out.println("estad");
 
+		pVo.setIDprofesional(Integer.parseInt(request.getParameter("id")));
+		pVo.setEstado(Boolean.parseBoolean(request.getParameter("estad")));
+		System.out.println("estad");
 		try {
-			//r dato que s guardo en el Vo (par de datos)
-			udao.changeEstado(r);
+			pDao.changeEstado(pVo);
 			response.sendRedirect("ProfesionalController?accion=listar");
-			System.out.println("PROFESIONAL cambiado");
-		}catch(Exception e) {
-			System.out.println("Error al cambiar el estado del Rol");
+			System.out.println("Profesional estado cambiado");
+		} catch (Exception e) {
+			System.out.println("Error al cambiar el estado de la Profesional");
 		}
 	}
 
@@ -337,7 +334,7 @@ private void edit(HttpServletRequest request, HttpServletResponse response) thro
 	private void validarCorreo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=iso-8859-1");
 		PrintWriter out=response.getWriter();
-		System.out.println("Entramos al m�todo listar");
+		System.out.println("Entramos al m�todo validar corr4eo");
 
 		try {
 			int cant=pDao.validarCorreo(request.getParameter("correo"));
@@ -379,7 +376,7 @@ private void edit(HttpServletRequest request, HttpServletResponse response) thro
 		}
 		try {
 			pDao.changeCorreo(pVo);
-			request.getRequestDispatcher("ProfesionalController?accion=logout").forward(request, response);
+			request.getRequestDispatcher("AfectadaController?accion=logout").forward(request, response);
 		}catch(Exception e) {
 			System.out.println("error al cambiar correo"+e.getMessage());
 		}
@@ -404,7 +401,7 @@ private void edit(HttpServletRequest request, HttpServletResponse response) thro
 		}
 		try {
 			pDao.changePassword(pVo);
-			request.getRequestDispatcher("ProfesionalController?accion=logout").forward(request, response);
+			request.getRequestDispatcher("AfectadaController?accion=logout").forward(request, response);
 		}catch(Exception e) {
 			System.out.println("error al cambiar password"+e.getMessage());
 		}

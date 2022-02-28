@@ -88,7 +88,9 @@ return row;//Retorna cantidad de filas afectadas
 
 public casoVo consultaId(int id) throws SQLException {
 casoVo r= new casoVo();
-sql = "SELECT * FROM caso where IDcaso="+id;
+//sql = "SELECT * FROM caso where IDcaso="+id;
+//	sql="SELECT IDcaso,tipoAbuso,tipoAsesoria,fechaInicio,fechaFin, estado,IDprofesional FROM caso where IDcaso="+id;
+	sql="SELECT IDcaso,tipoAbuso,tipoAsesoria,fechaInicio,fechaFin, estado FROM caso where IDcaso="+id;
 
 
 try {
@@ -102,13 +104,12 @@ try {
 		r.setFechaInicio(rs.getString("tipoAsesoria"));
 		r.setFechaInicio(rs.getString("fechaInicio"));
 		r.setFechaInicio(rs.getString("fechaFin"));
-		r.setFechaInicio(rs.getString("urlDocumento"));
+		//r.setFechaInicio(rs.getString("urlDocumento"));
 		r.setEstado(rs.getBoolean("estado"));
 		r.setAfeCas(new afectadaVo());
-		r.getAfeCas().setNombre(rs.getString("nombreAfectada"));
-		r.getProfCaso().setNombre(rs.getString("nombreProfesional"));
-
-		
+		//r.getAfeCas().setNombre(rs.getString("nombreAfectada"));
+		//r.getProfCaso().setNombre(rs.getString("nombre"));
+	//	r.getProfCaso().setIDprofesional(rs.getInt("IDprofesional"));
 		System.out.println("consulta exitosa");
 	
 	}
@@ -123,8 +124,8 @@ return r;
 }
 
 public int edit(casoVo r) throws SQLException {
-
-sql="UPDATE caso SET fechaInicio=?,fechaFin=?,estado=? WHERE IDcaso="+r.getIDcaso();
+	sql="UPDATE caso SET tipoAbuso=?, tipoAsesoria=?, fechaInicio=?,fechaFin=?,estado=? WHERE IDcaso="+r.getIDcaso();
+//sql="UPDATE caso SET tipoAbuso=?, tipoAsesoria=?, fechaInicio=?,fechaFin=?,estado=?,IDprofesional=? WHERE IDcaso="+r.getIDcaso();
 //UPDATE caso SET tipoAbuso='', tipoAsesoria=?, fechaInicio=?,fechaFin=?,urlDocumento=?,estado=?,IDafectada=?,IDprofesional=? WHERE IDcaso=1;
 
 try {
@@ -134,12 +135,10 @@ try {
 	ps.setString(2, r.getTipoAsesoria());
 	ps.setString(3, r.getFechaInicio());
 	ps.setString(4, r.getFechaFin());
-	ps.setString(5, r.getUrlDocumento());
-	ps.setBoolean(6, r.isEstado());
-	ps.setString(7, r.getAfeCas().getNombre());
-	ps.setString(8, r.getProfCaso().getNombre());
-
-
+	//ps.setString(5, r.getUrlDocumento());
+	ps.setBoolean(5, r.isEstado());
+	//ps.setString(7, r.getAfeCas().getNombre());
+	//ps.setInt(6, r.getProfCaso().getIDprofesional());
 	System.out.println(ps);
 	ps.executeUpdate();//Ejeuci�n de la sentencia	
 	ps.close();

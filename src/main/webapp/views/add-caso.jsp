@@ -41,7 +41,7 @@
 	<div class="form-check">
 		<input class="form-check-input" type="checkbox" name="chkEstado" id="chkEstado" checked>
 		<label class="form-check-label" for="flexCheckChecked">
-			Caso Activo
+			Caso Tomado
 		</label>
 	</div>
 

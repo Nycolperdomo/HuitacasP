@@ -131,6 +131,36 @@ public class afectadaDao {
 		}
 		return u;
 	}
+	public afectadaVo validarUsuario2(String correo) throws SQLException {
+		afectadaVo u=new afectadaVo();
+		sql="SELECT IDafectada,nombre,apellido,correo,contrasena,numeroDocumento,estado,cargo FROM afectada WHERE correo=? ;";
+		try {
+			con= Conexion.conectar();
+			ps=con.prepareStatement(sql);
+			ps.setString(1, correo);
+		//	ps.setString(2, passw);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				u.setIDafectada(rs.getInt(1));
+				u.setNombre(rs.getString(2));
+				u.setApellido(rs.getString(3));
+				u.setCorreo(rs.getString(4));
+				//u.setContrasena(getMD5(rs.getString(3)));
+				//u.setContrasena(rs.getString(3));
+				u.setContrasena(rs.getString(5));
+				u.setNumeroDocumento(rs.getString(6));
+				u.setEstado(rs.getBoolean(7));
+				u.setCargo(rs.getString(8));
+			}
+			ps.close();
+			System.out.println("Se encontró el Usuario");
+		}catch(Exception e) {
+			System.out.println("Se encontró el Usuario"+e.getMessage());
+		}finally {
+			con.close();
+		}
+		return u;
+	}
 
 	public int eliminar(int id) throws SQLException {
 	sql="DELETE FROM afectada WHERE IDafectada="+id;
@@ -146,29 +176,6 @@ public class afectadaDao {
 		
 	}catch(Exception e) {
 		System.out.println("Error al eliminar afectada" +e.getMessage());
-	}
-	finally {
-		con.close();
-	}
-	return row;//Retorna cantidad de filas afectadas
-}
-		
-
-public int changeEstado(afectadaVo a) throws SQLException {
-	sql="UPDATE afectada SET estado=? FROM afectada WHERE IDafectada"+avo.getIDafectada();
-	
-	try {
-		con=c.conectar(); //Abriendo la conexi�n a la BD
-		ps=con.prepareStatement(sql); //preparar sentencia
-		ps.setBoolean(1, a.isEstado());
-		
-		System.out.println(ps);
-		ps.executeUpdate();//Ejeuci�n de la sentencia	
-		ps.close();
-		System.out.println("Se cambio el estado de una afectada");
-		
-	}catch(Exception e) {
-		System.out.println("Error al cambiar estado afectada" +e.getMessage());
 	}
 	finally {
 		con.close();
@@ -323,6 +330,29 @@ public int registrar(afectadaVo r) throws SQLException {
 
 		return total;
 	}
+	public int changeEstado(afectadaVo r) throws SQLException {
+		sql="UPDATE afectada SET estado=? WHERE IDafectada="+r.getIDafectada();
+		try {
+			con= Conexion.conectar();//abriendo la conexion a la bd
+			ps= con.prepareStatement(sql);//preparar sentencia
+			ps.setBoolean(1, r.isEstado());
+
+			System.out.println(ps);
+			ps.executeUpdate();//ejecucion de la sentencia sentencias dif a consulta
+			ps.close();
+			System.out.println("se cambio el estado de afectada");
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("error al cambiar el estado del la afectada"+e.getMessage());
+		}
+		finally {
+
+			con.close();
+		}
+		return row;//retorna cantidad de filas afectadas
+	}
+
 	public int changePassword(afectadaVo us) throws SQLException {
 		sql="UPDATE afectada SET contrasena=? WHERE IDafectada="+us.getIDafectada();
 

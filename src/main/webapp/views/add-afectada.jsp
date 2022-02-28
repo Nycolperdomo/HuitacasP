@@ -36,8 +36,9 @@
 		</div>
 		<div class="form-group">
 			<label for="correo">Correo</label>
-			<input class="form-control" type="email" name="correo" placeholder="Ingrese su Correo" required>
+			<input class="form-control" type="email" name="correo" placeholder="Ingrese su Correo" onchange="verifyCorreo()" required>
 		</div>
+		<div id="validarC" class="text-danger"></div>
 		<div class="form-group">
 			<label for="contrasena">Contrasena</label>
 			<input class="form-control" type="password" name="contrasena" placeholder="Ingrese su contraseña " required>
@@ -139,7 +140,7 @@
 		const correo=document.getElementById("correo").value;
 
 		$.ajax({
-			url:"RolController?accion=validarCorreo",
+			url:"AfectadaController?accion=validarCorreo",
 			data:{
 				correo:correo
 			},

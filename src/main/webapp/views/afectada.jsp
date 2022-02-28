@@ -26,16 +26,13 @@
 			<td>${a.getCorreo()}</td>
 			<!-- para poner el estado de la tabla que esta relacionada -->
 
-			
 			<c:if test="${a.isEstado()==true}">
 				<td><span class="badge bg-success">Activo</span>
 					<a class="btn btn-danger btn-sm" onclick="changeEstado(event,${a.getIDafectada()},${a.isEstado()},'Afectada')" role="button">Inactivar</a>
-				
 				</td>
 			</c:if>
 			<c:if test="${a.isEstado()==false}">
 				<td><span class="badge bg-danger">Inactivo</span>
-				
 				<a class="btn btn-success btn-sm" onclick="changeEstado(event,${a.getIDafectada()},${a.isEstado()},'Afectada')" role="button">Activar</a>
 				</td>
 			</c:if>
@@ -44,12 +41,6 @@
 			<!--invocar una funcion con onclick(borrar es el nombre de la funcion)-->
 			<a class="btn btn-danger" onclick="borrar(event,${a.getIDafectada()},'Afectada')" role="button">Borrar</a>
 			</td>
-			<c:if test="${a.isEstado()==false}">
-				<td><span class="badge bg-danger">Inactivo</span>
-
-					<a class="btn btn-success btn-sm" onclick="changeEstado(event,${a.getIDafectada()},${a.isEstado()},'Afectada')" role="button">Activar</a>
-				</td>
-			</c:if>
 		</tr>
 	</c:forEach>
 

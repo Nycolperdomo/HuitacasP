@@ -141,22 +141,23 @@ public class AfectadaController extends HttpServlet {
 					case "changeCorreo":
 						changeCorreo(request,response);
 						break;
-					/*case "abrirFormRegis":
+					case "abrirFormRegis":
 						abrirFormRegis(request,response);
-						break;*/
+						break;
 					case "validarCorreo":
 						validarCorreo(request,response);
 						break;
 					case "page":
 						page(request, response);
 						break;
+					case "add2":
+						add(request,response);
+						break;
 			/*case "abrirForm":
 				abrirForm(request,response);
 				break;
 				
-			case "add":
-				add(request,response);
-				break;
+
 			;*/
 					case "reporteAfectadas":
 						reporteAfectadas(request, response);
@@ -302,15 +303,12 @@ private void changeEstado(HttpServletRequest request, HttpServletResponse respon
 
 
 	private void changeEstado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		afectadaDao udao = new afectadaDao();
-		afectadaVo r = new afectadaVo();
-		r.setIDafectada(Integer.parseInt(request.getParameter("id")));
-		r.setEstado(Boolean.parseBoolean(request.getParameter("estad")));
-		System.out.println("estad");
 
+		aVo.setIDafectada(Integer.parseInt(request.getParameter("id")));
+		aVo.setEstado(Boolean.parseBoolean(request.getParameter("estad")));
+		System.out.println("estad");
 		try {
-			//r dato que s guardo en el Vo (par de datos)
-			udao.changeEstado(r);
+			aDao.changeEstado(aVo);
 			response.sendRedirect("AfectadaController?accion=listar");
 			System.out.println("Afectada estado cambiado");
 		} catch (Exception e) {
@@ -544,6 +542,65 @@ private void changeEstado(HttpServletRequest request, HttpServletResponse respon
 	}
 
 */
+	private void add2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Entramos al método agrgarADD");
+		if (request.getParameter("nombre") != null) {
+			aVo.setNombre(request.getParameter("nombre"));
+		}
+		if (request.getParameter("apellido") != null) {
+			aVo.setApellido(request.getParameter("apellido"));
+		}
+		if (request.getParameter("correo") != null) {
+			aVo.setCorreo(request.getParameter("correo"));
+			if (request.getParameter("contrasena") != null) {
+				aVo.setContrasena(request.getParameter("contrasena"));
+			}
+			if (request.getParameter("numeroDocumento") != null) {
+				aVo.setNumeroDocumento(request.getParameter("numeroDocumento"));
+			}
+			if (request.getParameter("fechaNa") != null) {
+				aVo.setFechaNacimiento(request.getParameter("fechaNa"));
+			}
+			aVo.setEstado(request.getParameter("chkEstado") != null);
+			if (request.getParameter("cargo") != null) {
+				aVo.setCargo(request.getParameter("cargo"));
+			}
+
+			String destinatario = request.getParameter("correo");
+			String asunto = "Bienvenido A Huitacas";
+			String cuerpo = "<h1> Gracias por registrarse en Huitacas </h1>"
+					//+ r.getCorreo() +", " +r.getContrasena()
+					+ " <img src ='https://harmonia.la/imagen_nota/feminismo.jpg?mrf-size=m'/>"
+					+ " <h4> Para iniciar sesiòn </h4>"
+					+ " <a href='http://localhost:8080/prac_war/AfectadaController?accion=abrirLogin'>Haga click aquì</a>";
+			try {
+				Configmail.enviarCorreo(host, puerto, remitente, password, destinatario, asunto, cuerpo);
+				System.out.println("el mensaje fue enviado correctamwnte");
+			} catch (Exception e) {
+				System.out.println("el mensaje fue enviado correctamwnte" + e.getMessage());
+			}
+			try {
+				aDao.registrar(aVo);
+				response.sendRedirect("AfectadaController?accion=listar");
+				System.out.println("Afectada registrada");
+			} catch (Exception e) {
+
+				System.out.println("Error al abrir el formulario regidtrar afec" + e.getMessage());
+			}
+		}
+	}
+	private void abrirFormRegis(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			request.getRequestDispatcher("views/JSPafectadasADD.jsp").forward(request, response);
+			System.out.println("Formulario profesional Abierto");
+		} catch (Exception e) {
+			System.out.println("Error al abrir el formulario profesionall");
+
+		}
+
+	}
+
+
 
 
 }

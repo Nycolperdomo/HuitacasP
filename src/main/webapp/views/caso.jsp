@@ -40,18 +40,18 @@
 			<td>${a.getFechaInicio()}</td>
 			<td>${a.getFechaFin()}</td>
 			<c:if test="${a.isEstado()==true}">
-				<td><span class="badge bg-success">Activo</span>
-					<a class="btn btn-danger btn-sm" onclick="changeEstado(event,${a.getIDcaso()},${a.isEstado()},'Caso')" role="button">Inactivar</a>
+				<td><span class="badge bg-success">Tomado</span>
+					<a class="btn btn-danger btn-sm" onclick="changeEstado(event,${a.getIDcaso()},${a.isEstado()},'Caso')" role="button">Pendiente</a>
 
 				</td>
 			</c:if>
 			<c:if test="${a.isEstado()==false}">
-				<td><span class="badge bg-danger">Inactivo</span>
-				
-				<a class="btn btn-success btn-sm" onclick="changeEstado(event,${a.getIDcaso()},${a.isEstado()},'Caso')" role="button">Activar</a>
+				<td><span class="badge bg-danger">Pendiente</span>
+
+				<a class="btn btn-success btn-sm" onclick="changeEstado(event,${a.getIDcaso()},${a.isEstado()},'Caso')" role="button">Tomado</a>
 				</td>
 			</c:if>
-			<td></td>
+
 			<td>
 			<a class="btn btn-warning" href="CasoController?accion=ver&id=${a.getIDcaso()}" role="button">Editar</a>
 			<!--invocar una funcion con onclick(borrar es el nombre de la funcion)-->

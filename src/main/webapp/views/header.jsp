@@ -74,31 +74,25 @@ if(session.getAttribute("us")!=null){
   
       </a>
     <br>
-    <a href="AfectadaController?accion=verPerfil" class="btn btn-outline-info">Ver Perfil Sesion AFECATDA</a>
+    <a <c:if test="${us.cargo!='Cliente'}">hidden</c:if> href="AfectadaController?accion=verPerfil" class="btn btn-info">Editar Correo</a>
       <br>
-    <a href="ProfesionalController?accion=verPerfil" class="btn btn-outline-info">Ver Perfil Sesion Prof</a>
+    <a <c:if test="${us.cargo=='Cliente'}">hidden</c:if> href="ProfesionalController?accion=verPerfil" class="btn btn-info">Editar CorreoP</a>
     <br>
-   <a <c:if test="${us.cargo!='Cliente'}">hidden</c:if> href="MisCasosController?accion=abrirFormRegis" class="btn btn-info">Registrar mi caso</a>
-   <br>
-   
-   <a <c:if test="${us.cargo!='Cliente'}">hidden</c:if> href="AfectadaController?accion=ver&id=${u.getIDprofesional()}" class="btn btn-warning">Editar mi informacion</a>
-   <br>
-   <a <c:if test="${us.cargo=='Cliente'}">hidden</c:if> href="ProfesionalController?accion=ver&id=${u.getIDprofesional()}" class="btn btn-info">Editar mi informacion</a>
-   <br>
- 	<a href="AfectadaController?accion=openPass" class="btn btn-outline-info">cambiar contraseña AFECATDA</a>
- 	<br>
+    <a <c:if test="${us.cargo!='Cliente'}">hidden</c:if> href="AfectadaController?accion=openPass" class="btn btn-info">Cambiar mi contraseña</a>
     <br>
-    <a href="ProfesionalController?accion=openPass" class="btn btn-outline-info">cambiar contraseña Profesional</a>
+    <a <c:if test="${us.cargo=='Cliente'}">hidden</c:if> href="ProfesionalController?accion=openPass" class="btn btn-info">cambiar mi contraseñaP</a>
     <br>
- 	<!--<a href="RolController?accion=openPass" class="btn btn-outline-info">Cambiar Contraseña</a>-->
- 	<br>
-  <a href="AfectadaController?accion=logout" class="btn btn-outline-danger">Cerrar Sesion</a>
+   <a <c:if test="${us.cargo!='Cliente'}">hidden</c:if> href="CasoController?accion=abrirFormRegistro" class="btn btn-info">Registrar mi caso</a>
+   <br>
+   <!--<a <cif test="{us.cargo!='Cliente'}">hidden</cif> href="AfectadaController?accion=ver&id={u.getIDprofesional()}" class="btn btn-warning">Editar mi informacion</a>
+   <br>
+   <a <cif test="{us.cargo=='Cliente'}">hidden</cif> href="ProfesionalController?accion=ver&id={u.getIDprofesional()}" class="btn btn-info">Editar mi informacion</a>-->
+  <a href="AfectadaController?accion=logout" class="btn btn-danger">Cerrar Sesion</a>
     <hr>
        <br>
- 	<!--<a href="TipoAbusoController?accion=abrirTAb" <cIif test="PESOS{us.cargo=='Cliente'}">hidden</cIif> class="btn btn-outline-info">Tipo Abuso</a>-->
  	<br>
     <ul class="nav nav-pills flex-column mb-auto">
-      <!--<li class="nav-item" <cif test="{us.cargo=='Cliente'}">hidden</cif>>-->
+      <li class="nav-item" <c:if test="${us.cargo=='Cliente'}">hidden</c:if>>
         <a href="AfectadaController?accion=listar" class="nav-link active" aria-current="page">
          <i class="bi bi-people-fill"></i>
           Afectadas
@@ -107,37 +101,31 @@ if(session.getAttribute("us")!=null){
       </li>
         <br>
         <ul class="nav nav-pills flex-column mb-auto">
-            <!--<li class="nav-item" <cif test="{us.cargo=='Cliente'}">hidden</cif>>-->
+            <li class="nav-item" <c:if test="${us.cargo=='Cliente'}">hidden</c:if>>
+                <a href="CasoController?accion=listar" class="nav-link active" aria-current="page">
+                    <i class="bi bi-people-fill"></i>
+                    Casos Registradoss
+                </a>
+                <br>
+            </li>
+            <br>
+            </li>
+        <br>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item" <c:if test="${us.cargo!='Administrador'}">hidden</c:if>>
             <a href="ProfesionalController?accion=listar" class="nav-link active" aria-current="page">
                 <i class="bi bi-people-fill"></i>
              Profesionales
             </a>
             <br>
             </li>
-      <br>
-            <ul class="nav nav-pills flex-column mb-auto">
-                <!--<li class="nav-item" <cif test="{us.cargo=='Cliente'}">hidden</cif>>-->
-                <a href="CasoController?accion=listar" class="nav-link active" aria-current="page">
-                    <i class="bi bi-people-fill"></i>
-                    Casos
-                </a>
-                <br>
-                </li>
-                <br>
-      </li>
+
        <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item" <c:if test="${us.cargo!='Administrador'}">hidden</c:if>>
         <a href="ProfesionalController?accion=listar" class="nav-link active" aria-current="page">
          <i class="bi bi-people-fill"></i>
           Profesionales
         </a>
-          <ul class="nav nav-pills flex-column mb-auto">
-              <li class="nav-item" <c:if test="${us.cargo!='Administrador'}">hidden</c:if>>
-                  <a href="RolController?accion=listarRoles" class="nav-link active" aria-current="page">
-                      <i class="bi bi-people-fill"></i>
-                      Usuarios
-                  </a>
-              </li>
       </li>
       <li <c:if test="${us.cargo=='Cliente'}">hidden</c:if>>
         <a href="CasoController?accion=listar" class="nav-link text-white" >
@@ -151,13 +139,13 @@ if(session.getAttribute("us")!=null){
           Ver CasosPDF
         </a>
       </li>
-         </li>
-         <li <c:if test="${us.cargo!='Cliente'}">hidden</c:if>>
+       <!--  </li>
+         <li <cif test="{us.cargo!='Cliente'}">hidden</cif>>
            <a href="MisCasosController?accion=listar" class="nav-link text-white" >
              <i class="bi bi-folder-check"></i>
              Mis casos
            </a>
-         </li>
+         </li>-->
       <li <c:if test="${us.cargo!='Cliente'}">hidden</c:if>>
         <a href="#" class="nav-link text-white">
           <i class="bi bi-folder-check"></i>

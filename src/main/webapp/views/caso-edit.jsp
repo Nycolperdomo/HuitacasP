@@ -37,29 +37,34 @@
   		<input type="text" class="form-control" name="fechaFin" id="fechaFin" placeholder="" value="${caso.fechaFin}"/>
   	</div>
 
-	<div class="form-group">
+	<!--<div class="form-group">
 		<label for="urlDocumento">urlDocumento</label>
-		<input type="file" class="form-control" name="urlDocumento" id="urlDocumento"  value="${caso.urlDocumneto}"/>
-	</div>
+		<input type="file" class="form-control" name="urlDocumento" id="urlDocumento"  value="{caso.urlDocumneto}"/>
+	</div>-->
   	<div class="form-check">
   <input class="form-check-input" type="checkbox" name="chkEstado" id="chkEstado" checked>
   <label class="form-check-label" for="flexCheckChecked">
-    Caso Activo, desmarca para desactivar
+    Caso Tomado, desmarca para que el caso este pendiente
   </label>
   </div>
 
-	<div class="form-group">
+	<!--<div class="form-group">
 		<label for="nombreAfectada">Nombre Afectada</label>
 		<input type="text" class="form-control" name="nombreAfectada" id="nombreAfectada" placeholder="" value="${caso.fechaFin}"/>
 	</div>
-  	
   	<div class="form-group">
-		<label for="nombreProfesional">Nombre Profesional</label>
-		<input type="text" class="form-control" name="nombreProfesional" id="nombreProfesional" placeholder="" value="${caso.fechaFin}"/>
+		<label for="nombre">Nombre Profesional</label>
+		<input type="text" class="form-control" name="IDprofesional" id="nombre" placeholder="" value="${caso.profCaso.IDafectada}"/>
 	</div>
+	<select name="procaso"><br>
+		<option> Seleccione al profesional con el que desea asesoria</option><br>
+		<cforEach items="{prof}" var="r">
+			<option value="{r.getIDprofesional()}"> {r.getNombre()} </option>
+		</cforEach>
+	</select><br>
 
 <div>
-
+-->
 <div>
 <button type="submit" class="btn btn-primary">Guardar</button>
 </div>

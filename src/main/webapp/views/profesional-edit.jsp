@@ -44,7 +44,7 @@
 			<label for="cargo">Cargo</label>
 			<select name="cargo" id="cargo" class="form-select" value="${profesional.cargo}">
 				<option selected>Selecione un tipo de documento</option>
-				<option value="afectada">Abogada</option>
+				<option value="abogada">Abogada</option>
 				<option value="psicologa">Psicologa</option>
 				<option value="administrador">Administrador</option>
 			</select>

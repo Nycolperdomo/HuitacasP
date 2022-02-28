@@ -184,30 +184,27 @@ public int registrar(profesionalVo p) throws SQLException {
 	}
 	return row;//Retorna cantidad de filas afectadas
 }
+	public int changeEstado(profesionalVo r) throws SQLException {
+		sql="UPDATE profesional SET estado=? WHERE IDprofesional="+r.getIDprofesional();
+		try {
+			con= Conexion.conectar();//abriendo la conexion a la bd
+			ps= con.prepareStatement(sql);//preparar sentencia
+			ps.setBoolean(1, r.isEstado());
 
+			System.out.println(ps);
+			ps.executeUpdate();//ejecucion de la sentencia sentencias dif a consulta
+			ps.close();
+			System.out.println("se cambio el estado de afectada");
 
-public int changeEstado(profesionalVo a) throws SQLException {
-	sql="UPDATE profesional SET estado=? FROM profesional WHERE IDprofesional"+a.getIDprofesional();
-	
-	try {
-		con= Conexion.conectar(); //Abriendo la conexi�n a la BD
-		ps=con.prepareStatement(sql); //preparar sentencia
-		ps.setBoolean(1, a.isEstado());
-		
-		System.out.println(ps);
-		ps.executeUpdate();//Ejeuci�n de la sentencia	
-		ps.close();
-		System.out.println("Se cambio el estado de profesional");
-		
-	}catch(Exception e) {
-		System.out.println("Error al cambiar estado de profesioanl" +e.getMessage());
+		} catch (Exception e) {
+			System.out.println("error al cambiar el estado del la afectada"+e.getMessage());
+		}
+		finally {
+			con.close();
+		}
+		return row;//retorna cantidad de filas afectadas
 	}
-	finally {
-		con.close();
-	}
-	return row;//Retorna cantidad de filas afectadas
 
-}
 
 public profesionalVo consultaId(int id) throws SQLException {
 	profesionalVo r= new profesionalVo();

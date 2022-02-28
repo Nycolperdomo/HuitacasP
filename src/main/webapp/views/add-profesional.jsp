@@ -18,8 +18,9 @@
 		</div>
 		<div class="form-group">
 			<label for="correo">Correo</label>
-			<input class="form-control" type="email" name="correo" placeholder="Ingrese su Correo" required>
+			<input class="form-control" type="email" onchange="verifyCorreo()" name="correo" placeholder="Ingrese su Correo" required>
 		</div>
+		<div id="validarC" class="text-danger"></div>
 		<!--<div class="form-group">
 			<label for="contrasena">Contraseña</label>
 			<input class="form-control" type="password" name="contrasena" placeholder="Ingrese su contraseña " required>
@@ -64,6 +65,24 @@
 
 
 <!-- Remind Passowrd -->
+		<!-- LIBRERIA JQUERY -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script>
+			function verifyCorreo(){
+				const correo=document.getElementById("correo").value;
+
+				$.ajax({
+					url:"ProfesionalController?accion=validarCorreo",
+					data:{
+						correo:correo
+					},
+					success: function(result){
+						$("#validarC").html(result);
+					}
+				})
+			}
+
+		</script>
 
 <div>
 
