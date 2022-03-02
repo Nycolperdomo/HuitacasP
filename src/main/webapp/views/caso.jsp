@@ -15,6 +15,8 @@
 		<th>Tipo<br>
 			Asesoria</th>
 
+		<th>ID<br>
+			profesional</th>
 		<th>Nombre<br>
 			Afectada</th>
 <!--afeCas y profCaso-->
@@ -25,7 +27,7 @@
 		<th>Fecha <br> Inicio</th>
 		<th>Fecha </br>Fin</th>
 		<th>Estado</th>
-		<th>Acciones</th>
+
 		<th colspan="2">Acciones</th>
 	</tr>
 	<!-- el member esta request.setAttribute("member", inte);para recibir datos (controller) -->
@@ -34,8 +36,9 @@
 			<td>${a.getIDcaso()}</td>
 			<td>${a.getTipoAbuso()}</td>
 			<td>${a.getTipoAsesoria()}</td>
-			<td>${a.profCaso.nombre}</td>
-			<td>${a.afeCas.nombre}</td>
+			<td>${a.getIDprofesional()}</td>
+			<td>${a.getNombreAfectada()}</td>
+			<td>${a.getNombreProfesional()}</td>
 			<td>${a.getUrlDocumento()}</td>
 			<td>${a.getFechaInicio()}</td>
 			<td>${a.getFechaFin()}</td>
@@ -53,12 +56,16 @@
 			</c:if>
 
 			<td>
-			<a class="btn btn-warning" href="CasoController?accion=ver&id=${a.getIDcaso()}" role="button">Editar</a>
+			<a class="btn btn-warning" href="CasoController?accion=ver&id=${a.getIDcaso()}" role="button">Editar</a
+				<input type="hidden" value="${a.getIDcaso()}" name="id">
+
 			<!--invocar una funcion con onclick(borrar es el nombre de la funcion)-->
 			<a class="btn btn-danger" onclick="borrar(event,${a.getIDcaso()},'Caso')" role="button">Borrar</a>
 			</td>
 		</tr>
+		<input type="hidden"/>
 	</c:forEach>
+
 
 </table>
 

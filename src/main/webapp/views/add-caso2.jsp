@@ -40,7 +40,7 @@
         <br>
         <div class="form-check">
             <input class="form-check-input" type="checkbox" name="chkEstado" id="chkEstado" checked>
-            <label class="form-check-label" for="flexCheckChecked">
+            <label class="form-check-label" for="chkEstado">
                 Caso Tomado
             </label>
         </div>
@@ -57,12 +57,12 @@
         </div>
 
 
-        <div>
+        <div class="form-group">
             <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
-
+<h1>sad mi vida wey</h1>
     </form>
 
-</div>
+</div >
 
 <%@include file="footer.jsp" %>

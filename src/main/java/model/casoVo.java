@@ -4,11 +4,12 @@ import java.sql.Date;
 
 public class casoVo {
 
-	private int IDcaso;
+	private int IDcaso,IDafectada,IDprofesional;
 	private Boolean estado ;
-	private String fechaInicio, fechaFin,tipoAbuso,tipoAsesoria,urlDocumento;
+	private String fechaInicio, fechaFin,tipoAbuso,tipoAsesoria,urlDocumento,nombreAfectada,nombreProfesional;
 	private afectadaVo afeCas;
 	private  profesionalVo profCaso;
+
 
 	/*
 
@@ -19,14 +20,17 @@ public class casoVo {
 		
 	}
 
-	public casoVo(int IDcaso, Boolean estado, String fechaInicio, String fechaFin, String tipoAbuso, String tipoAsesoria, String urlDocumento, afectadaVo afeCas, profesionalVo profCaso) {
+	public casoVo(int IDcaso, int IDafectada, int IDprofesional, Boolean estado, String fechaInicio, String fechaFin, String tipoAbuso, String tipoAsesoria, String nombreAfectada, String nombreProfesional, afectadaVo afeCas, profesionalVo profCaso) {
 		this.IDcaso = IDcaso;
+		this.IDafectada = IDafectada;
+		this.IDprofesional = IDprofesional;
 		this.estado = estado;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.tipoAbuso = tipoAbuso;
 		this.tipoAsesoria = tipoAsesoria;
-		this.urlDocumento = urlDocumento;
+		this.nombreAfectada = nombreAfectada;
+		this.nombreProfesional = nombreProfesional;
 		this.afeCas = afeCas;
 		this.profCaso = profCaso;
 	}
@@ -118,10 +122,39 @@ public class casoVo {
 		return this.afeCas!=null ? this.afeCas.getNombre() : "--";
 	}
 
+	public int getIDafectada() {
+		return IDafectada;
+	}
 
-        public String getEstadoRep() {
+	public void setIDafectada(int IDafectada) {
+		this.IDafectada = IDafectada;
+	}
+
+	public int getIDprofesional() {
+		return IDprofesional;
+	}
+
+	public void setIDprofesional(int IDprofesional) {
+		this.IDprofesional = IDprofesional;
+	}
+
+	public String getEstadoRep() {
             return this.estado ? "Activo" : "Inactivo";
         }
 
+	public String getNombreAfectada() {
+		return nombreAfectada;
+	}
 
+	public void setNombreAfectada(String nombreAfectada) {
+		this.nombreAfectada = nombreAfectada;
+	}
+
+	public String getNombreProfesional() {
+		return nombreProfesional;
+	}
+
+	public void setNombreProfesional(String nombreProfesional) {
+		this.nombreProfesional = nombreProfesional;
+	}
 }

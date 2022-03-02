@@ -63,16 +63,19 @@ public class CasoController extends HttpServlet {
 				case "abrirFormRegis":
 					abrirFormRegis(request,response);
 					break;
-
 					case "abrirFormRegistro":
 						abrirFormRegistro(request,response);
 						break;
+
 				case "delete":
 					delete(request,response);
 					break;
 				case "add":
 					add(request,response);
 					break;
+					/*case "add2":
+						add2(request,response);
+						break;*/
 				case "changeEstado":
 					changeEstado(request,response);
 					break;
@@ -209,6 +212,7 @@ public class CasoController extends HttpServlet {
 		}
 
 	}
+
 	private void abrirFormRegistro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			this.listarCaso(request,response);
@@ -228,7 +232,7 @@ public class CasoController extends HttpServlet {
 				cVo.setTipoAsesoria(request.getParameter("tipoAsesoria"));
 				cVo.setFechaInicio(request.getParameter("fechaInicio"));
 				cVo.setFechaFin(request.getParameter("fechaFin"));
-				cVo.setUrlDocumento(request.getParameter("documneto"));
+				cVo.setUrlDocumento(request.getParameter("documento"));
 				//cVo.setEstado(request.getParameter("chkEstado") != null);
 				if(request.getParameter("chkEstado") !=null){
 					cVo.setEstado(true);
@@ -252,14 +256,53 @@ public class CasoController extends HttpServlet {
 			*/
 			try {
 				cDao.registrar(cVo);
-				response.sendRedirect("CasoController?accion=page");
+				response.sendRedirect("CasoController?accion=listar");
 				System.out.println("caso registrado");
 			}catch(Exception e) {
 				
 				System.out.println("Error al abrir el formulario regidtrar profesional"+e.getMessage());
 			}
 		}
+		/*
+	private void add2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		if(request.getParameter("fechaInicio") !=null && request.getParameter("fechaFin")!=null) {
+			cVo.setTipoAbuso(request.getParameter("tipoAbuso"));
+			cVo.setTipoAsesoria(request.getParameter("tipoAsesoria"));
+			cVo.setFechaInicio(request.getParameter("fechaInicio"));
+			cVo.setFechaFin(request.getParameter("fechaFin"));
+			cVo.setUrlDocumento(request.getParameter("documneto"));
+			//cVo.setEstado(request.getParameter("chkEstado") != null);
+			if(request.getParameter("chkEstado") !=null){
+				cVo.setEstado(true);
+			}
+			else {
+				cVo.setEstado(false);
+			}
+			afectadaVo a = new afectadaVo();
+			a.setIDafectada(Integer.parseInt(request.getParameter("afecas")));
+			profesionalVo p = new profesionalVo();
+			p.setIDprofesional(Integer.parseInt(request.getParameter("procaso")));
+
+			cVo.setAfeCas(a);
+			cVo.setProfCaso(p);
+
+		}
+			/*tipoAsesoriaVo t = new tipoAsesoriaVo();
+
+				t.setIDasesoria(Integer.parseInt(request.getParameter("asesoria")));
+				cVo.setAseCas(t);
+			cerrraaar
+		try {
+			cDao.registrar(cVo);
+			response.sendRedirect("CasoController?accion=listar");
+			System.out.println("caso registrado");
+		}catch(Exception e) {
+
+			System.out.println("Error al abrir el formulario regidtrar profesional"+e.getMessage());
+		}
+	}
+*/
 		private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
 			if(request.getParameter("id") !=null) {
@@ -323,9 +366,12 @@ public class CasoController extends HttpServlet {
 				cVo.setFechaFin(request.getParameter("fechaFin"));
 				//cVo.setUrlDocumento(request.getParameter("urlDocumento"));
 				cVo.setEstado(request.getParameter("chkEstado") != null);
-				//afectadaVo a = new afectadaVo();
+				/*afectadaVo a = new afectadaVo();
+				a.setIDafectada(a.getIDafectada());
+				profesionalVo p = new profesionalVo();
+				p.setIDprofesional(a.getIDafectada());*/
 				//a.setIDafectada(Integer.parseInt(request.getParameter("afecas")));
-				//profesionalVo p = new profesionalVo();
+				//profesionalVo p = new profesionalVo();cas
 				//p.setIDprofesional(Integer.parseInt(request.getParameter("procaso")));
 
 				//cVo.setAfeCas(a);

@@ -28,25 +28,29 @@ public class casoDao {
 	public List listar() throws SQLException {
 		List <casoVo> caso = new ArrayList<>();
 		//sql = "SELECT IDcaso,fechaInicio,fechaFin,estado,tipo FROM caso JOIN tipo_asesoria on tipo_asesoria.IDasesoria = caso.IDcaso;";
-		sql="SELECT * FROM caso";
+		sql="select * from afectada inner join caso on afectada.IDafectada=caso.IDafectada INNER JOIN profesional on caso.IDprofesional=profesional.IDprofesional;";
 		try {
 			con= Conexion.conectar();//abriendo la conexion a la bd
 			ps= con.prepareStatement(sql);//preparar sentencia
 			rs = ps.executeQuery();//ejecucion de la sentencia y guardar el resultado en el resulSet
 			while(rs.next()) {
 				casoVo a = new casoVo();
-				a.setIDcaso(rs.getInt(1));
-				a.setTipoAbuso(rs.getString(2));
-				a.setTipoAsesoria(rs.getString(3));
-				a.setFechaInicio(rs.getString(4));
-				a.setFechaFin(rs.getString(5));
-				a.setUrlDocumento(rs.getString(6));
-				a.setEstado(rs.getBoolean(7));
+				a.setIDcaso(rs.getInt(10));
+				a.setTipoAbuso(rs.getString(11));
+				a.setTipoAsesoria(rs.getString(12));
+				a.setFechaInicio(rs.getString(13));
+				a.setFechaFin(rs.getString(14));
+				a.setUrlDocumento(rs.getString(15));
+				a.setEstado(rs.getBoolean(16));
+				a.setIDafectada(rs.getInt(1));
+				a.setNombreAfectada(rs.getString(2));
+				a.setIDprofesional(rs.getInt(17));
+				a.setNombreProfesional(rs.getString(20));
 
-				a.setAfeCas(new afectadaVo());
+				/*a.setAfeCas(new afectadaVo());
 				a.getAfeCas().setNombre(rs.getString(8));
 				a.setProfCaso(new profesionalVo());
-				a.getProfCaso().setNombre(rs.getString(9));
+				a.getProfCaso().setNombre(rs.getString(9));*/
 				caso.add(a);
 				System.out.println("conexion exitosa");
 			}
@@ -100,13 +104,16 @@ try {
 	
 	while(rs.next()) {
 		r.setIDcaso(rs.getInt("IDcaso"));
-		r.setFechaInicio(rs.getString("tipoAbuso"));
-		r.setFechaInicio(rs.getString("tipoAsesoria"));
+		r.setTipoAbuso(rs.getString("tipoAbuso"));
+		r.setTipoAsesoria(rs.getString("tipoAsesoria"));
 		r.setFechaInicio(rs.getString("fechaInicio"));
-		r.setFechaInicio(rs.getString("fechaFin"));
-		//r.setFechaInicio(rs.getString("urlDocumento"));
+		r.setFechaFin(rs.getString("fechaFin"));
+		//r.setUrlDocumento(rs.getString("urlDocumento"));
 		r.setEstado(rs.getBoolean("estado"));
-		r.setAfeCas(new afectadaVo());
+		//r.setNombreAfectada(rs.getString(""));
+		//r.setNombreProfesional(rs.getString(""));
+
+		//r.setAfeCas(new afectadaVo());
 		//r.getAfeCas().setNombre(rs.getString("nombreAfectada"));
 		//r.getProfCaso().setNombre(rs.getString("nombre"));
 	//	r.getProfCaso().setIDprofesional(rs.getInt("IDprofesional"));
@@ -124,10 +131,9 @@ return r;
 }
 
 public int edit(casoVo r) throws SQLException {
-	sql="UPDATE caso SET tipoAbuso=?, tipoAsesoria=?, fechaInicio=?,fechaFin=?,estado=? WHERE IDcaso="+r.getIDcaso();
+	//sql="UPDATE caso SET tipoAbuso=?, tipoAsesoria=?, fechaInicio=?,fechaFin=?,estado=? WHERE IDcaso="+r.getIDcaso();
 //sql="UPDATE caso SET tipoAbuso=?, tipoAsesoria=?, fechaInicio=?,fechaFin=?,estado=?,IDprofesional=? WHERE IDcaso="+r.getIDcaso();
-//UPDATE caso SET tipoAbuso='', tipoAsesoria=?, fechaInicio=?,fechaFin=?,urlDocumento=?,estado=?,IDafectada=?,IDprofesional=? WHERE IDcaso=1;
-
+sql="UPDATE caso SET tipoAbuso=?, tipoAsesoria=?, fechaInicio=?,fechaFin=?,estado=? WHERE IDcaso="+r.getIDcaso();
 try {
 	con= Conexion.conectar(); //Abriendo la conexi�n a la BD
 	ps=con.prepareStatement(sql); //preparar sentencia
@@ -137,8 +143,8 @@ try {
 	ps.setString(4, r.getFechaFin());
 	//ps.setString(5, r.getUrlDocumento());
 	ps.setBoolean(5, r.isEstado());
-	//ps.setString(7, r.getAfeCas().getNombre());
-	//ps.setInt(6, r.getProfCaso().getIDprofesional());
+	//ps.setInt(6, r.getIDafectada());
+	//ps.setInt(7, r.getIDprofesional());
 	System.out.println(ps);
 	ps.executeUpdate();//Ejeuci�n de la sentencia	
 	ps.close();

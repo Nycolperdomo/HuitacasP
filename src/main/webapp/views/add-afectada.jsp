@@ -12,6 +12,8 @@
 	<link rel="stylesheet" href="css/style.css">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script type="text/javascript" src="validation.js"></script>
+	<script type="text/javascript" src="validacionForm.js"></script>
+
 </head>
 <body style="background-color:#E28EEB;">
 
@@ -23,29 +25,33 @@
 
 	<h1>Registrar Afectada</h1>
 
-	<form method="post" action="AfectadaController?accion=add">
+	<form method="post" action="AfectadaController?accion=add" name="formulario">
 
 		<!-- ESTOS DATOS SE MIRAN EN LA BD  -->
 		<div class="form-group">
 			<label for="nombre">Nombre</label> 
-			<input class="form-control" type="text" name="nombre" placeholder="Ingrese su nombre" required>
+			<input class="form-control" id="nombre" type="text" name="nombre" placeholder="Ingrese su nombre" required>
+			<label id="error1" style="color: red"></label>
 		</div>
 		<div class="form-group">
 			<label for="apellido">Apellido</label> 
-			<input class="form-control" type="text" name="apellido" placeholder="Ingrese su Apellido" required>
+			<input class="form-control" id="apellido" type="text" name="apellido" placeholder="Ingrese su Apellido" required>
+			<label id="errorA" style="color: red"></label>
 		</div>
 		<div class="form-group">
 			<label for="correo">Correo</label>
-			<input class="form-control" type="email" name="correo" placeholder="Ingrese su Correo" onchange="verifyCorreo()" required>
+			<input class="form-control" id="correo" type="email" name="correo" placeholder="Ingrese su Correo" onchange="verifyCorreo()" required>
+			<label id="error2" style="color: red"></label>
 		</div>
 		<div id="validarC" class="text-danger"></div>
 		<div class="form-group">
 			<label for="contrasena">Contrasena</label>
-			<input class="form-control" type="password" name="contrasena" placeholder="Ingrese su contraseña " required>
+			<input class="form-control" type="password" id="contrasena" name="contrasena" placeholder="Ingrese su contraseña " required>
+			<label id="error3" style="color: red"></label>
 		</div>
 		<div class="form-group">
 			<label for="numeroDocumento">Numero de Documento</label>
-			<input class="form-control" type="number" name="numeroDocumento" placeholder="Ingrese su Numero De Documento " required>
+			<input class="form-control" type="number" id="numeroDocumento" name="numeroDocumento" placeholder="Ingrese su Numero De Documento " required>
 		</div>
 		<div class="form-group">
 			<label for="fechaNa">Fecha De Nacimiento:</label>
@@ -59,7 +65,7 @@
 		</div>
 		<div class="form-group">
 			<label for="cargo">Cargo Usuario</label>
-			<select name="cargo" class="form-select">
+			<select id="cargo" name="cargo" class="form-select">
 				<option>Seleccione el cargo del Usuario</option>
 				<option value="Cliente">Cliente</option>
 
@@ -116,7 +122,7 @@
 		<div>
 
 			<br>
-			<button type="submit" class="btn btn-primary">Guardar</button>
+			<button type="submit" onclick="return validar();" onclick=" return val();" onclick="return vali();" class="btn btn-primary">Guardar</button>
 		</div>
 
 
@@ -132,6 +138,7 @@
 </aside>
 </div>
 </form>
+
 
 <!-- LIBRERIA JQUERY -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -151,7 +158,82 @@
 	}
 
 </script>
+<script type="text/javascript">
+	function validar(){
+	return validar_nombre();
+	}
+	function vali(){
+	return validar_apellido();
+	}
+	function  val(){
+		return  validar_correo();
+}
+	function validar_nombre(){
+		var nombre = document.formulario.nombre.value;
+		var error1= document.getElementById('error1');
+		var valida=/^[a-z-A-Z]{1,30}$/;
 
+		if (nombre===""){
+			error1.textContent="*Error necesita agregar un nombre";
+		}else if (nombre.length>30) {
+			error1.textContent="*Error demasiados caracteres";
+			return false;
+		}else if (!valida.test(nombre)){
+			error1.textContent="*Error solo se permiten letras";
+			return false;
+		}
+	}
+	function validar_apellido(){
+		var apellido = document.formulario.apellido.value;
+		var errorA= document.getElementById('errorA');
+		var valida=/^[a-z-A-Z]{1,30}$/;
+
+		if (apellido===""){
+			errorA.textContent="*Error necesita agregar un nombre";
+		}else if (apellido.length>30) {
+			errorA.textContent="*Error demasiados caracteres";
+			return false;
+		}else if (!valida.test(apellido)){
+			errorA.textContent="*Error solo se permiten letras";
+			return false;
+		}
+	}
+
+	function validar_correo(){
+		var correo = document.formulario.correo.value;
+		var error2= document.getElementById('error2')
+		var validar=/^[a-z-A-Z-0-9]+@+[a-z]+.+[a-z]$/;
+		if (correo===""){
+			error2.textContent="Debe digitar un un correo Electronico";
+			return false;
+		}
+		else if(correo.length>50){
+			error2.textContent="*Error demasiados caracteres";
+			return false;
+		}
+		else if (!validar.test(correo)){
+			error2.textContent="*Error el correo debe ser valido";
+			return false;
+		}
+	}
+	function validar_constrasena(){
+		var constrasena = document.formulario.contrasena.value;
+		var error3= document.getElementById('error3')
+		var valid=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){5,15}$/;;
+
+		if (constrasena===""){
+			error3.textContent="*Error Debe digitar una contraseña";
+			return false;
+		} else if (constrasena.length<5){
+			error3.textContent="*Error debe ingresar mas de 5 y menos de 15 caracteres";
+			return false;
+		}	else if (!validar.test(contrasena)){
+			error3.textContent="*Error la contrasena debe ser valido";
+			return false;
+		}
+
+	}
+</script>
 </body>
 </html>
 
